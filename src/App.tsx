@@ -1,8 +1,20 @@
 import 'src/App.css'
-import TestComponent from 'components/TestComponent/TestComponent'
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+import { Routes, Route } from 'react-router-dom'
+import MainPage from './pages/MainPage/MainPage'
+import SharedLayout from './components/SharedLayout/SharedLayout'
 
 function App() {
-    return <TestComponent />
+    return (
+        <div>
+            <Routes>
+                <Route path="/" element={<SharedLayout />}>
+                    <Route index element={<MainPage />} />
+                </Route>
+            </Routes>
+        </div>
+    )
 }
 
 export default App

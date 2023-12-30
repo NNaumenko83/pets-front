@@ -1,5 +1,11 @@
+import Logo from '../Logo/Logo'
+
 function TestComponent() {
-    return <div>TestComponent</div>
+    return (
+        <header>
+            <Logo />
+        </header>
+    )
 }
 
 export default TestComponent
