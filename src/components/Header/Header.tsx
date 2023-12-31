@@ -1,5 +1,11 @@
+import Nav from '../Nav/Nav'
+
 function Header() {
-    return <div>Header</div>
+    return (
+        <div>
+            <Nav />
+        </div>
+    )
 }
 
 export default Header
