@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { styled } from 'styled-components'
+import styled from '@emotion/styled'
 
 const ContainerStyled = styled.div`
     max-width: 743px;

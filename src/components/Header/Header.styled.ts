@@ -1,5 +1,5 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { styled } from 'styled-components'
+import styled from '@emotion/styled'
 
 const HeaderStyled = styled.header`
     width: 100%;
