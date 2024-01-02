@@ -1,10 +1,13 @@
+import Container from '../Container/Container'
 import Navigation from '../Navigation/Navigation'
 import HeaderStyled from './Header.styled'
 
 function Header() {
     return (
         <HeaderStyled>
-            <Navigation />
+            <Container>
+                <Navigation />
+            </Container>
         </HeaderStyled>
     )
 }
