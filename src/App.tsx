@@ -1,5 +1,3 @@
-import 'src/App.css'
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Routes, Route } from 'react-router-dom'
 import { lazy } from 'react'
@@ -19,19 +17,17 @@ const UserPage = lazy(() => import('./pages/UserPage/UserPage'))
 
 function App() {
     return (
-        <div>
-            <Routes>
-                <Route path="/" element={<SharedLayout />}>
-                    <Route index element={<MainPage />} />
-                    <Route path="news" element={<NewsPage />} />
-                    <Route path="notices" element={<NoticesPage />} />
-                    <Route path="friends" element={<OurFriendsPage />} />
-                    <Route path="login" element={<LoginPage />} />
-                    <Route path="register" element={<RegisterPage />} />
-                    <Route path="user" element={<UserPage />} />
-                </Route>
-            </Routes>
-        </div>
+        <Routes>
+            <Route path="/" element={<SharedLayout />}>
+                <Route index element={<MainPage />} />
+                <Route path="news" element={<NewsPage />} />
+                <Route path="notices" element={<NoticesPage />} />
+                <Route path="friends" element={<OurFriendsPage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+                <Route path="user" element={<UserPage />} />
+            </Route>
+        </Routes>
     )
 }
 

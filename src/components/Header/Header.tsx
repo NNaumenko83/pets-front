@@ -1,10 +1,11 @@
 import Navigation from '../Navigation/Navigation'
+import HeaderStyled from './Header.styled'
 
 function Header() {
     return (
-        <div>
+        <HeaderStyled>
             <Navigation />
-        </div>
+        </HeaderStyled>
     )
 }
 
