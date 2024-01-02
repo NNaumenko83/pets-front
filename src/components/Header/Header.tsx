@@ -1,9 +1,9 @@
-import Nav from '../Nav/Nav'
+import Navigation from '../Navigation/Navigation'
 
 function Header() {
     return (
         <div>
-            <Nav />
+            <Navigation />
         </div>
     )
 }
