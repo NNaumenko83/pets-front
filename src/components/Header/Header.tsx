@@ -5,6 +5,7 @@ import HeaderStyled from './Header.styled'
 function Header() {
     return (
         <HeaderStyled>
+            <h1>Logo</h1>
             <Container>
                 <Navigation />
             </Container>
