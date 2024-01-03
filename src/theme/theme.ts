@@ -6,6 +6,7 @@ declare module '@mui/material/styles' {
             buttonTextColor: string
             buttonHoverTextColor: string
             buttonHoverBackgroundColor: string
+            formBackgroundColor: string
         }
     }
     // allow configuration using `createTheme`
@@ -14,6 +15,7 @@ declare module '@mui/material/styles' {
             buttonTextColor?: string
             buttonHoverTextColor?: string
             buttonHoverBackgroundColor?: string
+            formBackgroundColor?: string
         }
     }
 }
@@ -44,6 +46,7 @@ const theme = createTheme({
         buttonHoverTextColor: '#FFFFFF',
         buttonHoverBackgroundColor:
             'linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)',
+        formBackgroundColor: '#FFFFFF',
     },
 })
 

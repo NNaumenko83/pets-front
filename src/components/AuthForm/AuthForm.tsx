@@ -5,6 +5,8 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import Form from './AuthForm.styled'
+import Title from '../Title/Title'
 
 const schema = yup
     .object({
@@ -39,12 +41,12 @@ function AuthForm() {
     })
 
     return (
-        <form
+        <Form
             onSubmit={handleSubmit(data => {
                 console.log(data)
             })}
         >
-            Registration
+            <Title>Registration</Title>
             <input {...register('email', {})} placeholder="Email" />
             <p>{errors.email?.message}</p>
             <input {...register('password', {})} placeholder="Password" />
@@ -55,7 +57,7 @@ function AuthForm() {
             />
             <p>{errors.confirmPassword?.message}</p>
             <button type="submit">Registration</button>
-        </form>
+        </Form>
     )
 }
 

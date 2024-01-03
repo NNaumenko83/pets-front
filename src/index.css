@@ -1,12 +1,12 @@
 @import-normalize; /* bring in normalize.css styles */
 
-/* Manrope SemiBold */
+/* Manrope SemiBold 600*/
 @font-face {
     font-family: 'Manrope SemiBold';
     src: url('./fonts/Manrope/Manrope-SemiBold.ttf') format('truetype');
 }
 
-/* Manrope Medium */
+/* Manrope Medium 500*/
 @font-face {
     font-family: 'Manrope Medium';
     src: url('./fonts/Manrope/Manrope-Medium.ttf') format('truetype');
