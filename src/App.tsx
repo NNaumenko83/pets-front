@@ -3,7 +3,6 @@ import { Routes, Route } from 'react-router-dom'
 import { lazy } from 'react'
 import MainPage from './pages/MainPage/MainPage'
 import SharedLayout from './components/SharedLayout/SharedLayout'
-import AppStyled from './App.styled'
 
 const OurFriendsPage = lazy(
     () => import('./pages/OurFriendsPage/OurFriendsPage'),
@@ -18,19 +17,17 @@ const UserPage = lazy(() => import('./pages/UserPage/UserPage'))
 
 function App() {
     return (
-        <AppStyled>
-            <Routes>
-                <Route path="/" element={<SharedLayout />}>
-                    <Route index element={<MainPage />} />
-                    <Route path="news" element={<NewsPage />} />
-                    <Route path="notices" element={<NoticesPage />} />
-                    <Route path="friends" element={<OurFriendsPage />} />
-                    <Route path="login" element={<LoginPage />} />
-                    <Route path="register" element={<RegisterPage />} />
-                    <Route path="user" element={<UserPage />} />
-                </Route>
-            </Routes>
-        </AppStyled>
+        <Routes>
+            <Route path="/" element={<SharedLayout />}>
+                <Route index element={<MainPage />} />
+                <Route path="news" element={<NewsPage />} />
+                <Route path="notices" element={<NoticesPage />} />
+                <Route path="friends" element={<OurFriendsPage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+                <Route path="user" element={<UserPage />} />
+            </Route>
+        </Routes>
     )
 }
 
