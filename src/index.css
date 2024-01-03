@@ -12,37 +12,37 @@
     src: url('./fonts/Manrope/Manrope-Medium.ttf') format('truetype');
 }
 
-/* Manrope Bold */
+/* Manrope Bold 700*/
 @font-face {
     font-family: 'Manrope Bold';
     src: url('./fonts/Manrope/Manrope-Bold.ttf') format('truetype');
 }
 
-/* Manrope Regular */
+/* Manrope Regular 400*/
 @font-face {
     font-family: 'Manrope Regular';
     src: url('./fonts/Manrope/Manrope-Regular.ttf') format('truetype');
 }
 
-/* Manrope ExtraBold */
+/* Manrope ExtraBold 800*/
 @font-face {
     font-family: 'Manrope ExtraBold';
     src: url('./fonts/Manrope/Manrope-ExtraBold.ttf') format('truetype');
 }
 
-/* Inter Regular */
+/* Inter Regular 400*/
 @font-face {
     font-family: 'Inter Regular';
     src: url('./fonts/Inter/Inter-Regular.ttf') format('truetype');
 }
 
-/* Inter Medium */
+/* Inter Medium 500*/
 @font-face {
     font-family: 'Inter Medium';
     src: url('./fonts/Inter/Inter-Medium.ttf') format('truetype');
 }
 
-/* Poppins Regular */
+/* Poppins Regular 400*/
 @font-face {
     font-family: 'Poppins Regular';
     src: url('./fonts/Poppins/Poppins-Regular.ttf') format('truetype');
