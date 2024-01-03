@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 
 import styled from '@emotion/styled'
 
-export const BoxStyled = styled(Box)`
+const BoxStyled = styled(Box)`
     position: absolute;
     top: 50%;
     left: 50%;

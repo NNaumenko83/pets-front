@@ -15,7 +15,17 @@ interface AppModalProps {
 
 function AppModal({ onClose, children, isOpen, ...props }: AppModalProps) {
     return (
-        <Modal keepMounted open={isOpen} onClose={onClose} {...props}>
+        <Modal
+            sx={{
+                '& > .MuiBackdrop-root': {
+                    backdropFilter: 'blur(2px)',
+                },
+            }}
+            keepMounted
+            open={isOpen}
+            onClose={onClose}
+            {...props}
+        >
             <BoxStyled>{children}</BoxStyled>
         </Modal>
     )
