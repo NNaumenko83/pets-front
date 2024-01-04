@@ -7,6 +7,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import Form from './AuthForm.styled'
 import Title from '../Title/Title'
+import Input from '../Input/Input'
 
 const schema = yup
     .object({
@@ -29,14 +30,14 @@ const schema = yup
     })
     .required()
 
-type FormData = yup.InferType<typeof schema>
+type TFormData = yup.InferType<typeof schema>
 
 function AuthForm() {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<FormData>({
+    } = useForm<TFormData>({
         resolver: yupResolver(schema),
     })
 
@@ -47,12 +48,24 @@ function AuthForm() {
             })}
         >
             <Title>Registration</Title>
-            <input {...register('email', {})} placeholder="Email" />
+            <Input
+                type="email"
+                register={register}
+                name="email"
+                placeholder="Email"
+            />
             <p>{errors.email?.message}</p>
-            <input {...register('password', {})} placeholder="Password" />
+            <Input
+                type="password"
+                register={register}
+                name="password"
+                placeholder="Password"
+            />
             <p>{errors.password?.message}</p>
-            <input
-                {...register('confirmPassword', {})}
+            <Input
+                type="password"
+                register={register}
+                name="confirmPassword"
                 placeholder="Confirm password"
             />
             <p>{errors.confirmPassword?.message}</p>
