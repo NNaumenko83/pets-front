@@ -12,6 +12,7 @@ import InputGroup from '../InputGrooup/InputGrooup'
 import InputsWrapper from '../InputsWrapper/InputsWrapper'
 import InputErrorWrapper from '../InputErrorWrapper/InputErrorWrapper'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
+import FormContentWrapper from '../FormContentWrapper/FormContentWrapper'
 
 const schema = yup
     .object({
@@ -51,7 +52,7 @@ function AuthForm() {
                 console.log(data)
             })}
         >
-            <div>
+            <FormContentWrapper>
                 <Title>Registration</Title>
                 <InputsWrapper>
                     <InputErrorWrapper>
@@ -91,7 +92,7 @@ function AuthForm() {
                     </InputErrorWrapper>
                 </InputsWrapper>
                 <button type="submit">Registration</button>
-            </div>
+            </FormContentWrapper>
         </Form>
     )
 }
