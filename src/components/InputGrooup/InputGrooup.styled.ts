@@ -1,9 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled'
 
-const InputGroupStyled = styled.div`
+type IInputGroupStyledProps = {
+    error: boolean
+}
+
+const InputGroupStyled = styled.div<IInputGroupStyledProps>`
     border-radius: 2.5rem;
     padding: 0.75rem 1rem;
-    border: 1px solid #54adff;
+    border: 1px solid
+        ${props =>
+            props.error
+                ? (props.theme as any).palette?.error.main
+                : (props.theme as any).colors?.inputBorderColor};
 `
 
 export default InputGroupStyled

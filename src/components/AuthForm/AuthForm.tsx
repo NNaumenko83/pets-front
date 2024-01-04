@@ -11,6 +11,7 @@ import Input from '../Input/Input'
 import InputGroup from '../InputGrooup/InputGrooup'
 import InputsWrapper from '../InputsWrapper/InputsWrapper'
 import InputErrorWrapper from '../InputErrorWrapper/InputErrorWrapper'
+import ErrorMessage from '../ErrorMessage/ErrorMessage'
 
 const schema = yup
     .object({
@@ -54,7 +55,7 @@ function AuthForm() {
                 <Title>Registration</Title>
                 <InputsWrapper>
                     <InputErrorWrapper>
-                        <InputGroup>
+                        <InputGroup error={!!errors.email}>
                             <Input
                                 type="email"
                                 register={register}
@@ -62,10 +63,10 @@ function AuthForm() {
                                 placeholder="Email"
                             />
                         </InputGroup>
-                        <p>{errors.email?.message}</p>
+                        <ErrorMessage>{errors.email?.message}</ErrorMessage>
                     </InputErrorWrapper>
                     <InputErrorWrapper>
-                        <InputGroup>
+                        <InputGroup error={!!errors.password}>
                             <Input
                                 type="password"
                                 register={register}
@@ -73,10 +74,10 @@ function AuthForm() {
                                 placeholder="Password"
                             />
                         </InputGroup>
-                        <p>{errors.password?.message}</p>
+                        <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </InputErrorWrapper>
                     <InputErrorWrapper>
-                        <InputGroup>
+                        <InputGroup error={!!errors.confirmPassword}>
                             <Input
                                 type="password"
                                 register={register}
@@ -84,7 +85,9 @@ function AuthForm() {
                                 placeholder="Confirm password"
                             />
                         </InputGroup>
-                        <p>{errors.confirmPassword?.message}</p>
+                        <ErrorMessage>
+                            {errors.confirmPassword?.message}
+                        </ErrorMessage>
                     </InputErrorWrapper>
                 </InputsWrapper>
                 <button type="submit">Registration</button>
