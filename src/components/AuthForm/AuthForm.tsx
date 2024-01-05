@@ -5,6 +5,7 @@
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
+import { useState } from 'react'
 import Form from './AuthForm.styled'
 import Title from '../Title/Title'
 import Input from '../Input/Input'
@@ -15,6 +16,8 @@ import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import FormContentWrapper from '../FormContentWrapper/FormContentWrapper'
 import AuthButton from '../AuthButton/AuthButton'
 import FormText from '../FormTextAndLink/FormTextAndLink'
+import InputRightAddon from '../InputRightAddon/InputRightAddon'
+import EyeButton from '../EyeButton/EyeButton'
 
 const schema = yup
     .object({
@@ -40,6 +43,13 @@ const schema = yup
 type TFormData = yup.InferType<typeof schema>
 
 function AuthForm() {
+    const [showPassword, setShowPassword] = useState(false)
+    const [showConfirmPassword, setConfirmPassword] = useState(false)
+    const onShowPasswordButtonClick: () => void = () =>
+        setShowPassword(!showPassword)
+    const onShowConfirmPasswordButtonClick: () => void = () =>
+        setConfirmPassword(!showConfirmPassword)
+
     const {
         register,
         handleSubmit,
@@ -71,22 +81,36 @@ function AuthForm() {
                     <InputErrorWrapper>
                         <InputGroup error={!!errors.password}>
                             <Input
-                                type="password"
+                                type={!showPassword ? 'password' : 'text'}
                                 register={register}
                                 name="password"
                                 placeholder="Password"
                             />
+                            <InputRightAddon>
+                                <EyeButton
+                                    onClick={onShowPasswordButtonClick}
+                                    showPassword={showPassword}
+                                />
+                            </InputRightAddon>
                         </InputGroup>
                         <ErrorMessage>{errors.password?.message}</ErrorMessage>
                     </InputErrorWrapper>
                     <InputErrorWrapper>
                         <InputGroup error={!!errors.confirmPassword}>
                             <Input
-                                type="password"
+                                type={
+                                    !showConfirmPassword ? 'password' : 'text'
+                                }
                                 register={register}
                                 name="confirmPassword"
                                 placeholder="Confirm password"
                             />
+                            <InputRightAddon>
+                                <EyeButton
+                                    onClick={onShowConfirmPasswordButtonClick}
+                                    showPassword={showConfirmPassword}
+                                />
+                            </InputRightAddon>
                         </InputGroup>
                         <ErrorMessage>
                             {errors.confirmPassword?.message}

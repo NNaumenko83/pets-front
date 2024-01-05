@@ -1,11 +1,12 @@
 import { ReactNode } from 'react'
+import RightAddon from './InputRightAddon.styled'
 
 interface IInputRightAddonProps {
     children: ReactNode
 }
 
 function InputRightAddon({ children }: IInputRightAddonProps) {
-    return <div>{children}</div>
+    return <RightAddon>{children}</RightAddon>
 }
 
 export default InputRightAddon

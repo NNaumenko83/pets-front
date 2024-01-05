@@ -6,7 +6,10 @@ type IInputGroupStyledProps = {
 }
 
 const InputGroupStyled = styled.div<IInputGroupStyledProps>`
+    display: flex;
+    align-items: center;
     border-radius: 2.5rem;
+    height: 48px;
     padding: 0.75rem 1rem;
     border: 1px solid
         ${props =>

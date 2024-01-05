@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden">
+  <defs>
+    <symbol id="eye-closed" viewBox="0 0 32 32">
+      <path fill="none" stroke="#54adff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.019 7.06A11.47 11.47 0 0 1 16 6.666c8.485 0 13.333 9.333 13.333 9.333s-1.105 2.128-3.184 4.351m-20.35-8.646C3.754 13.907 2.667 16 2.667 16S7.515 25.333 16 25.333c1.069 0 2.081-.148 3.033-.407m-3.7-4.981a4.007 4.007 0 0 1-3.106-2.611m4.44-5.279a4.003 4.003 0 0 1 3.278 3.278M4 4l24 24" style="stroke:var(--color1, #54adff)"/>
+    </symbol>
+    <symbol id="eye-opened" viewBox="0 0 32 32">
+      <path fill="none" stroke="#54adff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.667 16S7.515 6.667 16 6.667 29.333 16 29.333 16 24.484 25.333 16 25.333C7.515 25.333 2.667 16 2.667 16z" style="stroke:var(--color1, #54adff)"/>
+      <path fill="none" stroke="#54adff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 20a4 4 0 1 0 0-8 4 4 0 0 0 0 8z" style="stroke:var(--color1, #54adff)"/>
+    </symbol>
+  </defs>
+</svg>
