@@ -4,6 +4,7 @@ declare module '@mui/material/styles' {
     interface Theme {
         colors: {
             buttonTextColor: string
+            formLinkTextColor: string
             buttonHoverTextColor: string
             authButtonBackgroundColor: string
             authButtonTextColor: string
@@ -16,6 +17,7 @@ declare module '@mui/material/styles' {
     interface ThemeOptions {
         colors?: {
             buttonTextColor?: string
+            formLinkTextColor?: string
             buttonHoverTextColor?: string
             authButtonTextColor?: string
             authButtonBackgroundColor?: string
@@ -50,6 +52,8 @@ const theme = createTheme({
     },
     colors: {
         buttonTextColor: '#54ADFF',
+        formLinkTextColor: '#54ADFF',
+        //  ${({ theme }) => (theme as any).colors?.formLinkTextColor};
         buttonHoverTextColor: '#FFFFFF',
         authButtonTextColor: '#FFFFFF',
         authButtonBackgroundColor: '#54ADFF',

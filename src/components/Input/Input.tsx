@@ -3,6 +3,7 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
+import InputStyled from './Input.styled'
 
 interface InputFieldProps<TFieldValues extends FieldValues> {
     type: string
@@ -18,7 +19,7 @@ function Input<TFieldValues extends FieldValues>({
     name,
 }: InputFieldProps<TFieldValues>) {
     return (
-        <input
+        <InputStyled
             {...register(name)}
             name={name}
             type={type}

@@ -14,7 +14,7 @@ import InputErrorWrapper from '../InputErrorWrapper/InputErrorWrapper'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import FormContentWrapper from '../FormContentWrapper/FormContentWrapper'
 import AuthButton from '../AuthButton/AuthButton'
-import FormText from '../FormText/FormText'
+import FormText from '../FormTextAndLink/FormTextAndLink'
 
 const schema = yup
     .object({
@@ -95,7 +95,11 @@ function AuthForm() {
                 </InputsWrapper>
                 <AuthButton type="submit">Registration</AuthButton>
             </FormContentWrapper>
-            <FormText text="Already have an account?" to="/login" />
+            <FormText
+                text="Already have an account?"
+                to="/login"
+                textLink="Login"
+            />
         </Form>
     )
 }
