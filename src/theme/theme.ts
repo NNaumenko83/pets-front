@@ -42,6 +42,7 @@ const theme = createTheme({
         text: {
             primary: '#111111',
             secondary: '#888888',
+            //  ${({ theme }) => (theme as any).palette?.text.secondary};
         },
         error: {
             main: '#F43F5E',

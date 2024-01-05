@@ -23,8 +23,7 @@ const AuthButtonStyled = styled(Button)`
     &:hover,
     &:focus {
         background: ${({ theme }) =>
-            (theme as any).colors
-                ?.buttonHoverBackgroundColor}; /* Змінено на градієнт для ховеру */
+            (theme as any).colors?.buttonHoverBackgroundColor};
     }
 `
 export default AuthButtonStyled
