@@ -13,6 +13,7 @@ import InputsWrapper from '../InputsWrapper/InputsWrapper'
 import InputErrorWrapper from '../InputErrorWrapper/InputErrorWrapper'
 import ErrorMessage from '../ErrorMessage/ErrorMessage'
 import FormContentWrapper from '../FormContentWrapper/FormContentWrapper'
+import AuthButton from '../AuthButton/AuthButton'
 
 const schema = yup
     .object({
@@ -91,7 +92,7 @@ function AuthForm() {
                         </ErrorMessage>
                     </InputErrorWrapper>
                 </InputsWrapper>
-                <button type="submit">Registration</button>
+                <AuthButton type="submit">Registration</AuthButton>
             </FormContentWrapper>
         </Form>
     )

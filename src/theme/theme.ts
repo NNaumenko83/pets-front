@@ -5,6 +5,8 @@ declare module '@mui/material/styles' {
         colors: {
             buttonTextColor: string
             buttonHoverTextColor: string
+            authButtonBackgroundColor: string
+            authButtonTextColor: string
             buttonHoverBackgroundColor: string
             formBackgroundColor: string
             inputBorderColor: string
@@ -15,6 +17,8 @@ declare module '@mui/material/styles' {
         colors?: {
             buttonTextColor?: string
             buttonHoverTextColor?: string
+            authButtonTextColor?: string
+            authButtonBackgroundColor?: string
             buttonHoverBackgroundColor?: string
             formBackgroundColor?: string
             inputBorderColor?: string
@@ -46,6 +50,9 @@ const theme = createTheme({
     colors: {
         buttonTextColor: '#54ADFF',
         buttonHoverTextColor: '#FFFFFF',
+        authButtonTextColor: '#FFFFFF',
+        authButtonBackgroundColor: '#54ADFF',
+        // ${({ theme }) =>(theme as any).colors?.authButtonBackgroundColor};
         buttonHoverBackgroundColor:
             'linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)',
         formBackgroundColor: '#FFFFFF',
