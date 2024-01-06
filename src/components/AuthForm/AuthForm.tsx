@@ -6,6 +6,8 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useState } from 'react'
+import { register as registerUser } from 'src/redux/auth/operations'
+import { useAppDispatch } from 'src/redux/hooks'
 import Form from './AuthForm.styled'
 import Title from '../Title/Title'
 import Input from '../Input/Input'
@@ -58,10 +60,18 @@ function AuthForm() {
         resolver: yupResolver(schema),
     })
 
+    const dispatch = useAppDispatch()
+
     return (
         <Form
             onSubmit={handleSubmit(data => {
-                console.log(data)
+                console.log('data:', data)
+                dispatch(
+                    registerUser({
+                        email: data.email,
+                        password: data.password,
+                    }),
+                )
             })}
         >
             <FormContentWrapper>
