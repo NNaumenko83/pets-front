@@ -4,6 +4,7 @@ import { lazy } from 'react'
 import MainPage from './pages/MainPage/MainPage'
 import SharedLayout from './components/SharedLayout/SharedLayout'
 import RestrictedRoute from './components/RestrictedRoute'
+import PrivateRoute from './components/PrivateRoute'
 
 const OurFriendsPage = lazy(
     () => import('./pages/OurFriendsPage/OurFriendsPage'),
@@ -24,12 +25,13 @@ function App() {
                 <Route path="news" element={<NewsPage />} />
                 <Route path="notices" element={<NoticesPage />} />
                 <Route path="friends" element={<OurFriendsPage />} />
-                <Route element={<RestrictedRoute redirectTo="/news" />}>
+                <Route element={<RestrictedRoute redirectTo="/user" />}>
                     <Route path="login" element={<LoginPage />} />
                     <Route path="register" element={<RegisterPage />} />
                 </Route>
-
-                <Route path="user" element={<UserPage />} />
+                <Route element={<PrivateRoute />}>
+                    <Route path="user" element={<UserPage />} />
+                </Route>
             </Route>
         </Routes>
     )

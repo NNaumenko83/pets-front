@@ -7,6 +7,7 @@ interface IRestrictedRouteProps {
 
 function RestrictedRoute({ redirectTo = '/' }: IRestrictedRouteProps) {
     const { isLoggedIn } = useAuth()
+
     return isLoggedIn ? <Navigate to={redirectTo} /> : <Outlet />
 }
 
