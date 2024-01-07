@@ -1,4 +1,4 @@
-import { Navigate, Outlet } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 import useAuth from 'src/hooks/useAuth'
 
 interface IRestrictedRouteProps {
@@ -6,9 +6,15 @@ interface IRestrictedRouteProps {
 }
 
 function RestrictedRoute({ redirectTo = '/' }: IRestrictedRouteProps) {
+    const location = useLocation()
+
     const { isLoggedIn } = useAuth()
 
-    return isLoggedIn ? <Navigate to={redirectTo} /> : <Outlet />
+    return isLoggedIn ? (
+        <Navigate to={redirectTo} state={{ from: location }} />
+    ) : (
+        <Outlet />
+    )
 }
 
 export default RestrictedRoute
