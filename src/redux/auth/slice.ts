@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice /* 8PayloadAction */ } from '@reduxjs/toolkit'
-import { register } from './operations'
+import { register, refreshUser } from './operations'
 
 // import { register, logIn, logOut, refreshUser } from './operations'
 
@@ -24,11 +24,21 @@ const authSlice = createSlice({
     initialState,
     reducers: {},
     extraReducers: builder => {
-        builder.addCase(register.fulfilled, (state, action) => {
-            state.user = action.payload.user
-            state.token = action.payload.token
-            state.isLoggedIn = true
-        })
+        builder
+            .addCase(register.fulfilled, (state, action) => {
+                state.user = action.payload.user
+                state.token = action.payload.token
+                state.isLoggedIn = true
+            })
+            .addCase(refreshUser.pending, (state, action) => {
+                state.isRefreshing = true
+            })
+            .addCase(refreshUser.fulfilled, (state, action) => {
+                state.user = action.payload.user
+                state.token = action.payload.token
+                state.isLoggedIn = true
+                state.isRefreshing = false
+            })
     },
 })
 

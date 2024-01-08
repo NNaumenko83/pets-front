@@ -1,10 +1,13 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { Routes, Route } from 'react-router-dom'
-import { lazy } from 'react'
+import { lazy, useEffect } from 'react'
 import MainPage from './pages/MainPage/MainPage'
 import SharedLayout from './components/SharedLayout/SharedLayout'
 import RestrictedRoute from './components/RestrictedRoute'
 import PrivateRoute from './components/PrivateRoute'
+import { useAppDispatch } from './redux/hooks'
+import { refreshUser } from './redux/auth/operations'
+import useAuth from './hooks/useAuth'
 
 const OurFriendsPage = lazy(
     () => import('./pages/OurFriendsPage/OurFriendsPage'),
@@ -18,7 +21,17 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'))
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'))
 
 function App() {
-    return (
+    const dispatch = useAppDispatch()
+
+    const { isRefreshing } = useAuth()
+
+    useEffect(() => {
+        dispatch(refreshUser())
+    }, [dispatch])
+
+    return isRefreshing ? (
+        'Fetching user data'
+    ) : (
         <Routes>
             <Route path="/" element={<SharedLayout />}>
                 <Route index element={<MainPage />} />
