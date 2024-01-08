@@ -10,6 +10,7 @@ export type Auth = {
     token: string | null
     isLoggedIn: boolean
     isRefreshing: boolean
+    showModalCongrats: boolean
 }
 
 const initialState: Auth = {
@@ -17,6 +18,7 @@ const initialState: Auth = {
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
+    showModalCongrats: true,
 }
 
 const authSlice = createSlice({
@@ -36,6 +38,7 @@ const authSlice = createSlice({
             .addCase(refreshUser.fulfilled, (state, action) => {
                 state.user = action.payload.user
                 state.token = action.payload.token
+                state.showModalCongrats = false
                 state.isLoggedIn = true
                 state.isRefreshing = false
             })
