@@ -1,14 +1,14 @@
-import Container from '../Container/Container'
+import Icon from '../Icon/Icon'
 import Navigation from '../Navigation/Navigation'
-import HeaderStyled from './Header.styled'
+import { HeaderStyled, HeaderContainer } from './Header.styled'
 
 function Header() {
     return (
         <HeaderStyled>
-            <h1>Logo</h1>
-            <Container>
+            <HeaderContainer>
+                <Icon name="logo" width={162} height={28} />
                 <Navigation />
-            </Container>
+            </HeaderContainer>
         </HeaderStyled>
     )
 }
