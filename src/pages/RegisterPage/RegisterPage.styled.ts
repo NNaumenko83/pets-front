@@ -6,11 +6,10 @@ export const RegisterPageStyled = styled.div`
     background-image: url(${bg});
     background-repeat: no-repeat;
     background-position: 50% 50%;
-    /* background-size: contain; */
-    height: 100vh;
+
+    height: calc(100vh - 68px);
 
     width: 100%;
-    border: 1px solid black;
 `
 
 export const FormWrapper = styled.div`

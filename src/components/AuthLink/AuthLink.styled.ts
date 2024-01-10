@@ -11,16 +11,17 @@ const AuthLinkStyled = styled(Link)<ILinkStyledProps>`
     display: flex;
 
     width: 10.3125rem;
+    height: 40px;
     padding: 0.5rem 1.25rem;
     justify-content: center;
     align-items: center;
     gap: 0.5rem;
 
-    font-family: 'Manrope Medium';
-    font-size: 20px;
+    font-family: 'Manrope SemiBold';
+    font-size: 16px;
 
-    line-height: 1.35;
-    letter-spacing: 0.8px;
+    line-height: 1.375;
+    letter-spacing: 0.64px;
 
     border-radius: 40px;
     border: 2px solid #ffc107;

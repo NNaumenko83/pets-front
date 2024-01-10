@@ -4,14 +4,13 @@ import ContainerStyled from '../Container/Container.styled'
 
 export const HeaderStyled = styled.header`
     /* position: absolute; */
-    padding-top: 10px;
-    padding-bottom: 10px;
+    margin-top: 1.25rem;
     width: 100%;
-    border: 1px solid red;
+    height: 3rem;
 `
 
 export const HeaderContainer = styled(ContainerStyled)`
     display: flex;
-    justify-content: space-between;
+    gap: 9.9375rem;
     align-items: center;
 `
