@@ -8,6 +8,9 @@ interface ILinkStyledProps extends LinkProps {
 }
 
 const LinkStyled = styled(Link)<ILinkStyledProps>`
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
     color: ${({ theme }) => (theme as any).palette?.text.primary};
     font-family: 'Manrope Medium';
     font-size: 20px;

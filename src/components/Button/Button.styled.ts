@@ -2,6 +2,8 @@
 import styled from '@emotion/styled'
 
 const ButtonStyled = styled.button`
+    display: flex;
+    align-items: center;
     color: ${({ theme }) => (theme as any).colors?.iconsColor};
     background-color: ${({ theme }) =>
         (theme as any).palette?.background.default};

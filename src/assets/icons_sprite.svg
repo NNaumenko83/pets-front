@@ -23,5 +23,9 @@
     <symbol id="logout" viewBox="0 0 32 32">
        <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="2" d="M18.667 5.333h5.333c1.473 0 2.667 1.194 2.667 2.667v16c0 1.473-1.194 2.667-2.667 2.667h-5.333M4 16h16M4 16l5.333-5.333M4 16l5.333 5.333"></path>
     </symbol>
+    <symbol id="user" viewBox="0 0 32 32">
+      <path fill="none" stroke-linejoin="miter" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="1.7143" d="M16 0.857c8.363 0 15.143 6.78 15.143 15.143s-6.78 15.143-15.143 15.143c-8.363 0-15.143-6.78-15.143-15.143s6.78-15.143 15.143-15.143z"></path>
+      <path fill="none" stroke-linejoin="round" stroke-linecap="round" stroke-miterlimit="4" stroke-width="1.7143" d="M25.143 27.429v-2.286c0-2.525-2.047-4.571-4.571-4.571h-9.143c-2.525 0-4.571 2.047-4.571 4.571v2.286M20.571 11.429c0 2.525-2.047 4.571-4.571 4.571s-4.571-2.047-4.571-4.571c0-2.525 2.047-4.571 4.571-4.571s4.571 2.047 4.571 4.571z"></path>
+</symbol>
   </defs>
 </svg>
