@@ -1,12 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link } from 'react-router-dom'
+
+import AuthLink from '../AuthLink/AuthLink'
+import AuthLinksWrapper from './AuthNav.styled'
 
 function AuthNav() {
     return (
-        <div>
-            <Link to="/login">Log IN</Link>
-            <Link to="/register">Registration</Link>
-        </div>
+        <AuthLinksWrapper>
+            <AuthLink to="/login">Log IN</AuthLink>
+            <AuthLink to="/register">Registration</AuthLink>
+        </AuthLinksWrapper>
     )
 }
 

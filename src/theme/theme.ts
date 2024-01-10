@@ -9,10 +9,15 @@ declare module '@mui/material/styles' {
             buttonHoverTextColor: string
             authButtonBackgroundColor: string
             authButtonTextColor: string
+            authLinkTextColor: string
+
             buttonHoverBackgroundColor: string
             formBackgroundColor: string
             inputBorderColor: string
             linkCurrentColor: string
+            authLinkCurrentColor: string
+            authLinkCurrentBgColor: string
+            authLinkBgColor: string
             linkHovertColor: string
         }
     }
@@ -34,11 +39,16 @@ declare module '@mui/material/styles' {
             formLinkTextColor?: string
             buttonHoverTextColor?: string
             authButtonTextColor?: string
+            authLinkTextColor?: string
+
             authButtonBackgroundColor?: string
             buttonHoverBackgroundColor?: string
             formBackgroundColor?: string
             inputBorderColor?: string
             linkCurrentColor?: string
+            authLinkCurrentColor?: string
+            authLinkCurrentBgColor?: string
+            authLinkBgColor?: string
             linkHovertColor?: string
         }
     }
@@ -82,6 +92,8 @@ const theme = createTheme({
         //  ${({ theme }) => (theme as any).colors?.formLinkTextColor};
         buttonHoverTextColor: '#FFFFFF',
         authButtonTextColor: '#FFFFFF',
+        authLinkTextColor: '#FFC107',
+
         authButtonBackgroundColor: '#54ADFF',
         // ${({ theme }) =>(theme as any).colors?.authButtonBackgroundColor};
         buttonHoverBackgroundColor:
@@ -90,6 +102,9 @@ const theme = createTheme({
         inputBorderColor: '#54ADFF',
         linkCurrentColor: '#FFC107',
         // ${({ theme}) =>(theme as any).colors?.linkCurrentColor
+        authLinkCurrentColor: '#FFFFFF',
+        authLinkCurrentBgColor: '#FFC107',
+        authLinkBgColor: '#FFFFFF',
         linkHovertColor: '#FFC107',
     },
 })
