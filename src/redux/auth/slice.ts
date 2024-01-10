@@ -39,7 +39,7 @@ const authSlice = createSlice({
                 state.user = action.payload.user
                 state.token = action.payload.token
                 state.showModalCongrats = false
-                state.isLoggedIn = true
+                state.isLoggedIn = false /* виправити */
                 state.isRefreshing = false
             })
     },

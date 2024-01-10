@@ -2,6 +2,7 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/require-default-props */
 import { MouseEvent, ReactNode } from 'react'
+import ButtonStyled from './Button.styled'
 
 interface ButtonProps {
     loading?: boolean
@@ -26,14 +27,14 @@ function Button({
     }
 
     return (
-        <button
+        <ButtonStyled
             type={type}
             onClick={handleClick}
             disabled={disabled}
             {...otherProps}
         >
             {children}
-        </button>
+        </ButtonStyled>
     )
 }
 

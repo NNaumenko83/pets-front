@@ -4,6 +4,7 @@ declare module '@mui/material/styles' {
     interface Theme {
         colors: {
             buttonTextColor: string
+            iconsColor: string
             formLinkTextColor: string
             buttonHoverTextColor: string
             authButtonBackgroundColor: string
@@ -11,12 +12,25 @@ declare module '@mui/material/styles' {
             buttonHoverBackgroundColor: string
             formBackgroundColor: string
             inputBorderColor: string
+            linkCurrentColor: string
+            linkHovertColor: string
         }
+    }
+    interface BreakpointOverrides {
+        xs: false // removes the `xs` breakpoint
+        sm: false
+        md: false
+        lg: false
+        xl: false
+        mobile: string // adds the `mobile` breakpoint
+        tablet: string
+        desktop: string
     }
     // allow configuration using `createTheme`
     interface ThemeOptions {
         colors?: {
             buttonTextColor?: string
+            iconsColor?: string
             formLinkTextColor?: string
             buttonHoverTextColor?: string
             authButtonTextColor?: string
@@ -24,6 +38,8 @@ declare module '@mui/material/styles' {
             buttonHoverBackgroundColor?: string
             formBackgroundColor?: string
             inputBorderColor?: string
+            linkCurrentColor?: string
+            linkHovertColor?: string
         }
     }
 }
@@ -43,6 +59,7 @@ const theme = createTheme({
         },
         text: {
             primary: '#111111',
+            // ${({ theme }) => (theme as any).palette?.text.primary};
             secondary: '#888888',
             //  ${({ theme }) => (theme as any).palette?.text.secondary};
         },
@@ -50,8 +67,17 @@ const theme = createTheme({
             main: '#F43F5E',
         },
     },
+    breakpoints: {
+        values: {
+            mobile: '320px',
+            tablet: '768px',
+            desktop: '1280px',
+        },
+    },
     colors: {
         buttonTextColor: '#54ADFF',
+        iconsColor: '#54ADFF',
+        // ${({ theme }) => (theme as any).colors?.iconsColor};
         formLinkTextColor: '#54ADFF',
         //  ${({ theme }) => (theme as any).colors?.formLinkTextColor};
         buttonHoverTextColor: '#FFFFFF',
@@ -62,6 +88,9 @@ const theme = createTheme({
             'linear-gradient(290deg, #419EF1 0%, #9BD0FF 107.89%)',
         formBackgroundColor: '#FFFFFF',
         inputBorderColor: '#54ADFF',
+        linkCurrentColor: '#FFC107',
+        // ${({ theme}) =>(theme as any).colors?.linkCurrentColor
+        linkHovertColor: '#FFC107',
     },
 })
 

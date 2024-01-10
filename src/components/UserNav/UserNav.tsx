@@ -1,12 +1,19 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link } from 'react-router-dom'
+import Button from '../Button/Button'
+import CustomLink from '../CustomLink/CustomLink'
+import Icon from '../Icon/Icon'
+import UserNavWrapper from './UserNav.styled'
 
 function UserNav() {
+    const handleButtonClick = () => console.log('LogOut')
+
     return (
-        <div>
-            <Link to="/user">User</Link>
-            <button type="button"> Log OUT</button>
-        </div>
+        <UserNavWrapper>
+            <CustomLink to="/user">User</CustomLink>
+            <Button type="button" onClick={handleButtonClick}>
+                <Icon name="logout" />
+            </Button>
+        </UserNavWrapper>
     )
 }
 

@@ -1,13 +1,14 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Link } from 'react-router-dom'
+
 import NavWrapper from './Nav.styled'
+import CustomLink from '../CustomLink/CustomLink'
 
 function Nav() {
     return (
         <NavWrapper>
-            <Link to="/news">News</Link>
-            <Link to="/notices">Notices</Link>
-            <Link to="/friends">Our friends</Link>
+            <CustomLink to="/news">News</CustomLink>
+            <CustomLink to="/notices">Notices</CustomLink>
+            <CustomLink to="/friends">Our friends</CustomLink>
         </NavWrapper>
     )
 }
