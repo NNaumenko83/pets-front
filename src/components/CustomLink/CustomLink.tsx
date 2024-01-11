@@ -10,9 +10,8 @@ interface ICustomLinkProps {
 
 function CustomLink({ children, to }: ICustomLinkProps) {
     const match = useMatch(to)
-    console.log('match:', match)
+
     const isMatched = match !== null
-    console.log('isMatched:', isMatched)
 
     return (
         <LinkStyled to={to} match={isMatched.toString()}>

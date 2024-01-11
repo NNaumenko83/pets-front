@@ -8,9 +8,9 @@ const ButtonStyled = styled.button`
     background-color: ${({ theme }) =>
         (theme as any).palette?.background.default};
 
-    :hover {
+    /* :hover {
         color: ${({ theme }) => (theme as any).colors?.linkHovertColor};
-    }
+    } */
 `
 
 export default ButtonStyled
