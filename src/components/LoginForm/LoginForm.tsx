@@ -59,7 +59,6 @@ function LoginForm() {
     return (
         <Form
             onSubmit={handleSubmit(data => {
-                console.log('data:', data)
                 dispatch(
                     login({
                         email: data.email,
