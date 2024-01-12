@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { useState } from 'react'
-import { register as registerUser } from 'src/redux/auth/operations'
+import { login } from 'src/redux/auth/operations'
 
 import { useAppDispatch } from 'src/redux/hooks'
 import Form from './LoginForm.styled'
@@ -36,11 +36,6 @@ const schema = yup
             .string()
             .required('Password is required')
             .min(6, 'Min length is 6'),
-        confirmPassword: yup
-            .string()
-            .oneOf([yup.ref('password'), undefined], 'Passwords must match')
-            .required('Confirm password is required')
-            .min(6, 'Min length is 6'),
     })
     .required()
 
@@ -66,7 +61,7 @@ function LoginForm() {
             onSubmit={handleSubmit(data => {
                 console.log('data:', data)
                 dispatch(
-                    registerUser({
+                    login({
                         email: data.email,
                         password: data.password,
                     }),

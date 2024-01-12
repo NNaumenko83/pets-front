@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-use-before-define */
 /* eslint-disable no-param-reassign */
 /* eslint-disable import/no-extraneous-dependencies */
-import { createSlice /* 8PayloadAction */ } from '@reduxjs/toolkit'
+import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit'
 
-import { register, refreshUser } from './operations'
+import { register, login, refreshUser, logout } from './operations'
 
 // import { register, logIn, logOut, refreshUser } from './operations'
 
@@ -12,6 +13,8 @@ export type Auth = {
     isLoggedIn: boolean
     isRefreshing: boolean
     showModalCongrats: boolean
+    error: null | string
+    loading: boolean
 }
 
 const initialState: Auth = {
@@ -20,6 +23,8 @@ const initialState: Auth = {
     isLoggedIn: false,
     isRefreshing: false,
     showModalCongrats: true,
+    error: null,
+    loading: false,
 }
 
 const authSlice = createSlice({
@@ -33,14 +38,31 @@ const authSlice = createSlice({
                 state.token = action.payload.token
                 state.isLoggedIn = true
             })
-            .addCase(refreshUser.pending, (state, action) => {
+            .addCase(login.fulfilled, (state, action) => {
+                state.user = action.payload.user
+                state.token = action.payload.token
+                state.isLoggedIn = true
+            })
+            .addCase(logout.fulfilled, state => {
+                state.user = { name: null, email: null }
+                state.token = null
+                state.isLoggedIn = false
+            })
+            .addCase(refreshUser.pending, state => {
                 state.isRefreshing = true
             })
             .addCase(refreshUser.fulfilled, (state, action) => {
                 state.user = action.payload.user
                 state.token = action.payload.token
                 state.showModalCongrats = false
-                // state.isLoggedIn = true /* виправити */
+                state.isLoggedIn = true
+                state.isRefreshing = false
+            })
+            // Щоб не писати rejected для кожного випадку використовуємо
+            // addMatcher
+            .addMatcher(isError, (state, action: PayloadAction<string>) => {
+                state.error = action.payload
+                state.loading = false
                 state.isRefreshing = false
             })
     },
@@ -49,3 +71,9 @@ const authSlice = createSlice({
 const authReducer = authSlice.reducer
 
 export default authReducer
+
+// Перевіряємо чи тип action закінчується на rejected
+
+function isError(action: Action) {
+    return action.type.endsWith('rejected')
+}
