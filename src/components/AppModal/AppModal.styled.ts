@@ -10,8 +10,9 @@ const BoxStyled = styled(Box)`
     transform: translate(-50%, -50%);
     min-width: 200px;
     max-width: 700px;
-    background-color: yellow;
-    border: 1px solid red;
+    /* background-color: yellow; */
+    overflow: hidden;
+
     border-radius: 16px;
     padding: 40px;
 `

@@ -157,3 +157,9 @@ body {
     display: flex;
     flex-direction: column;
 }
+
+.reactEasyCrop_Container {
+    position: relative;
+    width: 400px;
+    height: 400px;
+}
