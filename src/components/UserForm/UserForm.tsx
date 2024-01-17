@@ -1,9 +1,15 @@
-import useModal from 'src/hooks/useModal'
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable no-console */
 import { useState } from 'react'
 import { getCroppedImg } from 'src/utils/canvasUtils'
-import AppModal from '../AppModal/AppModal'
-import CropperImage from '../CropperImage/CropperImage'
+import { Button, Box } from '@mui/material'
+
+import Dialog from '@mui/material/Dialog'
+import DialogActions from '@mui/material/DialogActions'
+import DialogContent from '@mui/material/DialogContent'
+import axios from 'axios'
 import UserFormStyled from './UserForm.styled'
+import CropperImage from '../CropperImage/CropperImage'
 
 function readFile(file) {
     return new Promise(resolve => {
@@ -14,21 +20,32 @@ function readFile(file) {
 }
 
 function UserForm() {
-    const { isOpen, onClose, openModal } = useModal()
+    // =====
+    const [open, setOpen] = useState(false)
+
+    const handleClickOpen = () => {
+        setOpen(true)
+    }
+
+    const handleClose = () => {
+        setOpen(false)
+    }
+    // =====
+
     const [imageSrc, setImageSrc] = useState(null)
     const [crop, setCrop] = useState({ x: 0, y: 0 })
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    console.log('croppedAreaPixels:', croppedAreaPixels)
-    const [croppedImage, setCroppedImage] = useState(null)
+    const [croppedImage, setCroppedImage] = useState<Blob | null>(null)
 
     const onFileChange = async e => {
         if (e.target.files && e.target.files.length > 0) {
             const file = e.target.files[0]
+
             const imageDataUrl = await readFile(file)
             setImageSrc(imageDataUrl)
-            openModal()
+            setOpen(true)
         }
     }
 
@@ -41,7 +58,7 @@ function UserForm() {
             )
             console.log('donee', { croppedImage })
             setCroppedImage(croppedImage)
-            onClose()
+            setOpen(false)
         } catch (e) {
             console.error(e)
         }
@@ -51,29 +68,27 @@ function UserForm() {
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
+    const handleSubmit = async e => {
+        e.preventDefault()
+
+        const avatar = await fetch(croppedImage)
+        const blobImage = await avatar.blob()
+
+        const formData = new FormData()
+
+        formData.append('avatar', blobImage, 'croppedImage.jpeg')
+        for (const [key, value] of formData.entries()) {
+            console.log(key, value)
+        }
+        const res = await axios.patch('/auth/avatars', formData)
+        console.log('res:', res)
+    }
+
     return (
         <div>
-            <button type="button" onClick={openModal}>
-                Open modal
-            </button>
             {croppedImage && <img src={croppedImage} alt="test" width="300" />}
-            {imageSrc && (
-                <AppModal isOpen={isOpen} onClose={onClose}>
-                    <CropperImage
-                        image={imageSrc}
-                        crop={crop}
-                        zoom={zoom}
-                        onCropChange={setCrop}
-                        onZoomChange={setZoom}
-                        onCropComplete={onCropComplete}
-                    />
-                    <button type="button" onClick={showCroppedImage}>
-                        Show Result
-                    </button>
-                </AppModal>
-            )}
             User form
-            <UserFormStyled>
+            <UserFormStyled onSubmit={handleSubmit}>
                 <input type="file" onChange={onFileChange} accept="image/*" />
                 <label htmlFor="name">
                     Name:
@@ -112,6 +127,34 @@ function UserForm() {
                 </label>
                 <button type="submit">Submit</button>
             </UserFormStyled>
+            <Dialog open={open} onClose={handleClose}>
+                <DialogContent
+                    dividers
+                    sx={{
+                        background: '#333',
+                        position: 'relative',
+                        height: 400,
+                        width: 'auto',
+                        minWidth: { sm: 300 },
+                    }}
+                >
+                    <CropperImage
+                        image={imageSrc}
+                        crop={crop}
+                        zoom={zoom}
+                        onCropChange={setCrop}
+                        onZoomChange={setZoom}
+                        onCropComplete={onCropComplete}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Box>
+                        <Button type="button" onClick={showCroppedImage}>
+                            Crop
+                        </Button>
+                    </Box>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
