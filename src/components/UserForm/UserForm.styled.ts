@@ -2,9 +2,13 @@ import styled from '@emotion/styled'
 import { Box } from '@mui/material'
 
 export const UserFormStyled = styled.form`
-    border: 1px solid red;
+    width: 24.6875rem;
+    height: 32.5rem;
+    padding: 1.25rem 1.5rem;
     display: flex;
+    align-items: center;
     flex-direction: column;
+    box-shadow: 3px 8px 14px 0px rgba(136, 198, 253, 0.19);
 `
 export const StyledBox = styled(Box)`
     display: flex;

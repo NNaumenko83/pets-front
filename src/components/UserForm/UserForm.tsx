@@ -100,53 +100,56 @@ function UserForm() {
                         />
                     )}
                 </AvatarWrapper>
+                <div>
+                    {' '}
+                    <label htmlFor="avatar">
+                        Edit Photo
+                        <input
+                            id="avatar"
+                            type="file"
+                            onChange={onFileChange}
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            name="avatar"
+                        />
+                    </label>
+                    <label htmlFor="name">
+                        Name:
+                        <input
+                            id="name"
+                            type="text"
+                            name="name"
+                            placeholder="Name"
+                        />
+                    </label>
+                    <label htmlFor="email">
+                        Email:
+                        <input
+                            id="email"
+                            type="email"
+                            name="email"
+                            placeholder="Email"
+                        />
+                    </label>
+                    <label htmlFor="birthday">
+                        Birthday:
+                        <input
+                            id="birthday"
+                            type="text"
+                            name="birthday"
+                            placeholder="Birthday"
+                        />
+                    </label>
+                    <label htmlFor="phone">
+                        Phone:
+                        <input id="phone" type="text" placeholder="Phone" />
+                    </label>
+                    <label htmlFor="city">
+                        City:
+                        <input id="city" type="text" placeholder="City" />
+                    </label>
+                </div>
 
-                <label htmlFor="avatar">
-                    Edit Photo
-                    <input
-                        id="avatar"
-                        type="file"
-                        onChange={onFileChange}
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        name="avatar"
-                    />
-                </label>
-                <label htmlFor="name">
-                    Name:
-                    <input
-                        id="name"
-                        type="text"
-                        name="name"
-                        placeholder="Name"
-                    />
-                </label>
-                <label htmlFor="email">
-                    Email:
-                    <input
-                        id="email"
-                        type="email"
-                        name="email"
-                        placeholder="Email"
-                    />
-                </label>
-                <label htmlFor="birthday">
-                    Birthday:
-                    <input
-                        id="birthday"
-                        type="text"
-                        name="birthday"
-                        placeholder="Birthday"
-                    />
-                </label>
-                <label htmlFor="phone">
-                    Phone:
-                    <input id="phone" type="text" placeholder="Phone" />
-                </label>
-                <label htmlFor="city">
-                    City:
-                    <input id="city" type="text" placeholder="City" />
-                </label>
                 <button type="submit">Submit</button>
             </UserFormStyled>
             <Dialog open={open} onClose={handleClose}>

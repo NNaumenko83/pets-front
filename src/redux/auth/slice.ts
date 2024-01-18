@@ -8,7 +8,7 @@ import { register, login, refreshUser, logout } from './operations'
 // import { register, logIn, logOut, refreshUser } from './operations'
 
 export type Auth = {
-    user: { name: string | null; email: string | null }
+    user: { name: string | null; email: string | null; avatar: string | null }
     token: string | null
     isLoggedIn: boolean
     isRefreshing: boolean
@@ -18,7 +18,7 @@ export type Auth = {
 }
 
 const initialState: Auth = {
-    user: { name: null, email: null },
+    user: { name: null, email: null, avatar: null },
     token: null,
     isLoggedIn: false,
     isRefreshing: false,
@@ -44,7 +44,7 @@ const authSlice = createSlice({
                 state.isLoggedIn = true
             })
             .addCase(logout.fulfilled, state => {
-                state.user = { name: null, email: null }
+                state.user = { name: null, email: null, avatar: null }
                 state.token = null
                 state.isLoggedIn = false
             })
