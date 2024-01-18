@@ -1,6 +1,6 @@
 /* eslint-disable react/require-default-props */
 /* eslint-disable react/jsx-props-no-spreading */
-import { ReactNode } from 'react'
+import { ReactNode, MouseEvent } from 'react'
 import AuthButtonStyled from './AuthButton.styled'
 
 interface IAuthButtonProps {
