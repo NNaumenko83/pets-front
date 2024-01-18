@@ -7,7 +7,13 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import axios from 'axios'
-import { UserFormStyled, StyledBox, AvatarWrapper } from './UserForm.styled'
+import {
+    UserFormStyled,
+    StyledBox,
+    AvatarWrapper,
+    InputsUserFormWrapper,
+    AvatarInputWrapper,
+} from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
 import AuthButton from '../AuthButton/AuthButton'
 
@@ -89,19 +95,18 @@ function UserForm() {
     return (
         <div>
             <UserFormStyled onSubmit={handleSubmit}>
-                <AvatarWrapper>
-                    {croppedImage ? (
-                        <img src={croppedImage} alt="avatar" width="182" />
-                    ) : (
-                        <img
-                            src={photoDefault}
-                            alt="defaultAvatar"
-                            width="182"
-                        />
-                    )}
-                </AvatarWrapper>
-                <div>
-                    {' '}
+                <AvatarInputWrapper>
+                    <AvatarWrapper>
+                        {croppedImage ? (
+                            <img src={croppedImage} alt="avatar" width="182" />
+                        ) : (
+                            <img
+                                src={photoDefault}
+                                alt="defaultAvatar"
+                                width="182"
+                            />
+                        )}
+                    </AvatarWrapper>
                     <label htmlFor="avatar">
                         Edit Photo
                         <input
@@ -113,6 +118,9 @@ function UserForm() {
                             name="avatar"
                         />
                     </label>
+                </AvatarInputWrapper>
+
+                <InputsUserFormWrapper>
                     <label htmlFor="name">
                         Name:
                         <input
@@ -148,7 +156,7 @@ function UserForm() {
                         City:
                         <input id="city" type="text" placeholder="City" />
                     </label>
-                </div>
+                </InputsUserFormWrapper>
 
                 <button type="submit">Submit</button>
             </UserFormStyled>

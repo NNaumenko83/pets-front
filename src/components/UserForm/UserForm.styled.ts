@@ -23,3 +23,15 @@ export const AvatarWrapper = styled.div`
     border-radius: 40px;
     overflow: hidden;
 `
+
+export const InputsUserFormWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+export const AvatarInputWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.9375rem;
+    margin-bottom: 26px;
+`
