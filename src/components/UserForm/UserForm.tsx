@@ -2,14 +2,14 @@
 /* eslint-disable no-console */
 import { useState } from 'react'
 import { getCroppedImg } from 'src/utils/canvasUtils'
-import { Button, Box } from '@mui/material'
 
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import axios from 'axios'
-import UserFormStyled from './UserForm.styled'
+import { UserFormStyled, StyledBox } from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
+import AuthButton from '../AuthButton/AuthButton'
 
 function readFile(file) {
     return new Promise(resolve => {
@@ -134,8 +134,10 @@ function UserForm() {
                         background: '#333',
                         position: 'relative',
                         height: 400,
-                        width: 'auto',
-                        minWidth: { sm: 300 },
+                        width: 400,
+                        minWidth: { sm: 200 },
+                        padding: 0,
+                        overflow: 'hidden',
                     }}
                 >
                     <CropperImage
@@ -148,11 +150,11 @@ function UserForm() {
                     />
                 </DialogContent>
                 <DialogActions>
-                    <Box>
-                        <Button type="button" onClick={showCroppedImage}>
-                            Crop
-                        </Button>
-                    </Box>
+                    <StyledBox>
+                        <AuthButton type="button" onClick={showCroppedImage}>
+                            APPLY
+                        </AuthButton>
+                    </StyledBox>
                 </DialogActions>
             </Dialog>
         </div>

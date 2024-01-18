@@ -18,7 +18,7 @@ function CropperImage({
                 image={image}
                 crop={crop}
                 zoom={zoom}
-                aspect={3 / 3}
+                aspect={1}
                 onCropChange={onCropChange}
                 onCropComplete={onCropComplete}
                 onZoomChange={onZoomChange}
