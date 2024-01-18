@@ -7,9 +7,11 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import axios from 'axios'
-import { UserFormStyled, StyledBox } from './UserForm.styled'
+import { UserFormStyled, StyledBox, AvatarWrapper } from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
 import AuthButton from '../AuthButton/AuthButton'
+
+import photoDefault from '../../assets/images/PhotoDefault.png'
 
 function readFile(file) {
     return new Promise(resolve => {
@@ -37,7 +39,7 @@ function UserForm() {
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    const [croppedImage, setCroppedImage] = useState<Blob | null>(null)
+    const [croppedImage, setCroppedImage] = useState<string | null>(null)
 
     const onFileChange = async e => {
         if (e.target.files && e.target.files.length > 0) {
@@ -86,10 +88,30 @@ function UserForm() {
 
     return (
         <div>
-            {croppedImage && <img src={croppedImage} alt="test" width="300" />}
-            User form
             <UserFormStyled onSubmit={handleSubmit}>
-                <input type="file" onChange={onFileChange} accept="image/*" />
+                <AvatarWrapper>
+                    {croppedImage ? (
+                        <img src={croppedImage} alt="avatar" width="182" />
+                    ) : (
+                        <img
+                            src={photoDefault}
+                            alt="defaultAvatar"
+                            width="182"
+                        />
+                    )}
+                </AvatarWrapper>
+
+                <label htmlFor="avatar">
+                    Edit Photo
+                    <input
+                        id="avatar"
+                        type="file"
+                        onChange={onFileChange}
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        name="avatar"
+                    />
+                </label>
                 <label htmlFor="name">
                     Name:
                     <input

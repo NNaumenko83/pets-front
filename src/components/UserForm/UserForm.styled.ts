@@ -12,3 +12,10 @@ export const StyledBox = styled(Box)`
     padding: 24px;
     justify-content: center;
 `
+
+export const AvatarWrapper = styled.div`
+    width: 182px;
+    height: 182px;
+    border-radius: 40px;
+    overflow: hidden;
+`
