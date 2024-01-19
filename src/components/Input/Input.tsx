@@ -10,6 +10,7 @@ interface InputFieldProps<TFieldValues extends FieldValues> {
     register: UseFormRegister<TFieldValues>
     placeholder: string
     name: Path<TFieldValues>
+    disabled: boolean | undefined
 }
 
 function Input<TFieldValues extends FieldValues>({
@@ -17,6 +18,7 @@ function Input<TFieldValues extends FieldValues>({
     register,
     placeholder,
     name,
+    disabled,
 }: InputFieldProps<TFieldValues>) {
     return (
         <InputStyled
@@ -24,6 +26,7 @@ function Input<TFieldValues extends FieldValues>({
             name={name}
             type={type}
             placeholder={placeholder}
+            disabled={disabled}
         />
     )
 }

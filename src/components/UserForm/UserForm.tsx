@@ -1,7 +1,10 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
 import { getCroppedImg } from 'src/utils/canvasUtils'
+import * as yup from 'yup'
 
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
@@ -36,8 +39,25 @@ function readFile(file) {
 
 import Input from '../Input/Input'
 
+const schema = yup
+    .object({
+        name: yup
+            .string()
+            .required()
+            .matches(/^[a-zA-Z]+$/, 'Input correct name with letters only'),
+        email: yup
+            .string()
+            .required('Email is required')
+            .matches(
+                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
+                'Input correct email',
+            ),
+    })
+    .required()
+
+type TFormData = yup.InferType<typeof schema>
+
 function UserForm() {
-    // =====
     const [open, setOpen] = useState(false)
 
     const handleClickOpen = () => {
@@ -47,7 +67,6 @@ function UserForm() {
     const handleClose = () => {
         setOpen(false)
     }
-    // =====
 
     const [imageSrc, setImageSrc] = useState(null)
     const [crop, setCrop] = useState({ x: 0, y: 0 })
@@ -55,6 +74,14 @@ function UserForm() {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState<string | null>(null)
+
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<TFormData>({
+        resolver: yupResolver(schema),
+    })
 
     const onFileChange = async e => {
         if (e.target.files && e.target.files.length > 0) {
@@ -85,60 +112,64 @@ function UserForm() {
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
-    const handleSubmit = async e => {
-        e.preventDefault()
+    // const handleSubmit = async e => {
+    //     e.preventDefault()
 
-        const avatar = await fetch(croppedImage)
-        const blobImage = await avatar.blob()
+    //     const avatar = await fetch(croppedImage)
+    //     const blobImage = await avatar.blob()
 
-        const formData = new FormData()
+    //     const formData = new FormData()
 
-        formData.append('avatar', blobImage, 'croppedImage.jpeg')
-        for (const [key, value] of formData.entries()) {
-            console.log(key, value)
-        }
-        const res = await axios.patch('/auth/avatars', formData)
-        console.log('res:', res)
-    }
+    //     formData.append('avatar', blobImage, 'croppedImage.jpeg')
+    //     for (const [key, value] of formData.entries()) {
+    //         console.log(key, value)
+    //     }
+    //     const res = await axios.patch('/auth/avatars', formData)
+    //     console.log('res:', res)
+    // }
 
     return (
         <div>
-            <UserFormStyled onSubmit={handleSubmit}>
-                <AvatarInputWrapper>
-                    <AvatarWrapper>
-                        {croppedImage ? (
-                            <img src={croppedImage} alt="avatar" width="182" />
-                        ) : (
-                            <img
-                                src={photoDefault}
-                                alt="defaultAvatar"
-                                width="182"
-                            />
-                        )}
-                    </AvatarWrapper>
-                    <AvatarLabel htmlFor="avatar">
-                        <Icon name="camera" width={24} height={24} />
-                        Edit Photo
-                        <input
-                            id="avatar"
-                            type="file"
-                            onChange={onFileChange}
-                            accept="image/*"
-                            style={{ display: 'none' }}
-                            name="avatar"
+            <AvatarInputWrapper>
+                <AvatarWrapper>
+                    {croppedImage ? (
+                        <img src={croppedImage} alt="avatar" width="182" />
+                    ) : (
+                        <img
+                            src={photoDefault}
+                            alt="defaultAvatar"
+                            width="182"
                         />
-                    </AvatarLabel>
-                </AvatarInputWrapper>
-
+                    )}
+                </AvatarWrapper>
+                <AvatarLabel htmlFor="avatar">
+                    <Icon name="camera" width={24} height={24} />
+                    Edit Photo
+                    <input
+                        id="avatar"
+                        type="file"
+                        onChange={onFileChange}
+                        accept="image/*"
+                        style={{ display: 'none' }}
+                        name="avatar"
+                    />
+                </AvatarLabel>
+            </AvatarInputWrapper>
+            <UserFormStyled
+                onSubmit={handleSubmit(data => {
+                    console.log('data:', data)
+                })}
+            >
                 <InputsUserFormWrapper>
                     <StyledUserInfoLabel htmlFor="name">
                         <LabelText> Name:</LabelText>
-                        <UserFormInputGroupStyled>
-                            <input
+                        <UserFormInputGroupStyled error={!!errors.name}>
+                            <Input
                                 id="name"
                                 type="text"
                                 name="name"
                                 placeholder="Name"
+                                register={register}
                             />
                             <InputRightAddon>
                                 <StyledEditIcon />
@@ -147,16 +178,17 @@ function UserForm() {
                     </StyledUserInfoLabel>
                     <StyledUserInfoLabel htmlFor="email">
                         <LabelText>Email:</LabelText>
-                        <UserFormInputGroupStyled>
-                            <input
+                        <UserFormInputGroupStyled error={!!errors.email}>
+                            <Input
                                 id="email"
                                 type="email"
                                 name="email"
                                 placeholder="Email"
+                                register={register}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
-                    <StyledUserInfoLabel htmlFor="birthday">
+                    {/* <StyledUserInfoLabel htmlFor="birthday">
                         <LabelText>Birthday:</LabelText>
                         <UserFormInputGroupStyled>
                             <input
@@ -178,7 +210,7 @@ function UserForm() {
                         <UserFormInputGroupStyled>
                             <input id="city" type="text" placeholder="City" />
                         </UserFormInputGroupStyled>
-                    </StyledUserInfoLabel>
+                    </StyledUserInfoLabel> */}
                 </InputsUserFormWrapper>
 
                 <button type="submit">Submit</button>
