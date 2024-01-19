@@ -20,7 +20,8 @@ export type Auth = {
 const initialState: Auth = {
     user: { name: null, email: null, avatar: null },
     token: null,
-    isLoggedIn: false,
+    // isLoggedIn: false,
+    isLoggedIn: true,
     isRefreshing: false,
     showModalCongrats: true,
     error: null,

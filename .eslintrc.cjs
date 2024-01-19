@@ -22,6 +22,12 @@ module.exports = {
             'warn',
             { allowConstantExport: true },
         ],
+        'prettier/prettier': [
+            'error',
+            {
+                endOfLine: 'auto',
+            },
+        ],
         'import/no-extraneous-dependencies': [
             'error',
             { devDependencies: true },

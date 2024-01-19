@@ -13,11 +13,18 @@ import {
     AvatarWrapper,
     InputsUserFormWrapper,
     AvatarInputWrapper,
+    UserFormInputGroupStyled,
+    AvatarLabel,
+    StyledEditIcon,
+    StyledUserInfoLabel,
+    LabelText,
 } from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
 import AuthButton from '../AuthButton/AuthButton'
 
 import photoDefault from '../../assets/images/PhotoDefault.png'
+import Icon from '../Icon/Icon'
+import InputRightAddon from '../InputRightAddon/InputRightAddon'
 
 function readFile(file) {
     return new Promise(resolve => {
@@ -26,6 +33,8 @@ function readFile(file) {
         reader.readAsDataURL(file)
     })
 }
+
+import Input from '../Input/Input'
 
 function UserForm() {
     // =====
@@ -107,7 +116,8 @@ function UserForm() {
                             />
                         )}
                     </AvatarWrapper>
-                    <label htmlFor="avatar">
+                    <AvatarLabel htmlFor="avatar">
+                        <Icon name="camera" width={24} height={24} />
                         Edit Photo
                         <input
                             id="avatar"
@@ -117,45 +127,58 @@ function UserForm() {
                             style={{ display: 'none' }}
                             name="avatar"
                         />
-                    </label>
+                    </AvatarLabel>
                 </AvatarInputWrapper>
 
                 <InputsUserFormWrapper>
-                    <label htmlFor="name">
-                        Name:
-                        <input
-                            id="name"
-                            type="text"
-                            name="name"
-                            placeholder="Name"
-                        />
-                    </label>
-                    <label htmlFor="email">
-                        Email:
-                        <input
-                            id="email"
-                            type="email"
-                            name="email"
-                            placeholder="Email"
-                        />
-                    </label>
-                    <label htmlFor="birthday">
-                        Birthday:
-                        <input
-                            id="birthday"
-                            type="text"
-                            name="birthday"
-                            placeholder="Birthday"
-                        />
-                    </label>
-                    <label htmlFor="phone">
-                        Phone:
-                        <input id="phone" type="text" placeholder="Phone" />
-                    </label>
-                    <label htmlFor="city">
-                        City:
-                        <input id="city" type="text" placeholder="City" />
-                    </label>
+                    <StyledUserInfoLabel htmlFor="name">
+                        <LabelText> Name:</LabelText>
+                        <UserFormInputGroupStyled>
+                            <input
+                                id="name"
+                                type="text"
+                                name="name"
+                                placeholder="Name"
+                            />
+                            <InputRightAddon>
+                                <StyledEditIcon />
+                            </InputRightAddon>
+                        </UserFormInputGroupStyled>
+                    </StyledUserInfoLabel>
+                    <StyledUserInfoLabel htmlFor="email">
+                        <LabelText>Email:</LabelText>
+                        <UserFormInputGroupStyled>
+                            <input
+                                id="email"
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                            />
+                        </UserFormInputGroupStyled>
+                    </StyledUserInfoLabel>
+                    <StyledUserInfoLabel htmlFor="birthday">
+                        <LabelText>Birthday:</LabelText>
+                        <UserFormInputGroupStyled>
+                            <input
+                                id="birthday"
+                                type="text"
+                                name="birthday"
+                                placeholder="Birthday"
+                            />
+                        </UserFormInputGroupStyled>
+                    </StyledUserInfoLabel>
+                    <StyledUserInfoLabel htmlFor="phone">
+                        <LabelText>Phone:</LabelText>
+                        <UserFormInputGroupStyled>
+                            <input id="phone" type="text" placeholder="Phone" />
+                        </UserFormInputGroupStyled>
+                    </StyledUserInfoLabel>
+                    <StyledUserInfoLabel htmlFor="city">
+                        <LabelText>City:</LabelText>
+                        <UserFormInputGroupStyled>
+                            <input id="city" type="text" placeholder="City" />
+                        </UserFormInputGroupStyled>
+                    </StyledUserInfoLabel>
                 </InputsUserFormWrapper>
 
                 <button type="submit">Submit</button>
