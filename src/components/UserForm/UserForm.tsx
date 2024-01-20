@@ -29,6 +29,8 @@ import photoDefault from '../../assets/images/PhotoDefault.png'
 import Icon from '../Icon/Icon'
 import InputRightAddon from '../InputRightAddon/InputRightAddon'
 
+import Input from '../Input/Input'
+
 function readFile(file) {
     return new Promise(resolve => {
         const reader = new FileReader()
@@ -36,8 +38,6 @@ function readFile(file) {
         reader.readAsDataURL(file)
     })
 }
-
-import Input from '../Input/Input'
 
 const schema = yup
     .object({
@@ -188,7 +188,7 @@ function UserForm() {
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
-                    {/* <StyledUserInfoLabel htmlFor="birthday">
+                    <StyledUserInfoLabel htmlFor="birthday">
                         <LabelText>Birthday:</LabelText>
                         <UserFormInputGroupStyled>
                             <input
@@ -210,7 +210,7 @@ function UserForm() {
                         <UserFormInputGroupStyled>
                             <input id="city" type="text" placeholder="City" />
                         </UserFormInputGroupStyled>
-                    </StyledUserInfoLabel> */}
+                    </StyledUserInfoLabel>
                 </InputsUserFormWrapper>
 
                 <button type="submit">Submit</button>
