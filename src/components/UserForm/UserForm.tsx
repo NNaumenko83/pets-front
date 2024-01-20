@@ -10,6 +10,7 @@ import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 import axios from 'axios'
+import parseDateString from 'src/utils/parseDateString'
 import {
     UserFormStyled,
     StyledBox,
@@ -30,6 +31,8 @@ import Icon from '../Icon/Icon'
 import InputRightAddon from '../InputRightAddon/InputRightAddon'
 
 import Input from '../Input/Input'
+
+const today = new Date()
 
 function readFile(file) {
     return new Promise(resolve => {
@@ -52,6 +55,11 @@ const schema = yup
                 /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
                 'Input correct email',
             ),
+        birthday: yup
+            .date()
+            .required('Birthday is required')
+            .transform(parseDateString)
+            .max(today),
     })
     .required()
 
@@ -190,12 +198,13 @@ function UserForm() {
                     </StyledUserInfoLabel>
                     <StyledUserInfoLabel htmlFor="birthday">
                         <LabelText>Birthday:</LabelText>
-                        <UserFormInputGroupStyled>
-                            <input
+                        <UserFormInputGroupStyled error={!!errors.birthday}>
+                            <Input
                                 id="birthday"
                                 type="text"
                                 name="birthday"
                                 placeholder="Birthday"
+                                register={register}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
