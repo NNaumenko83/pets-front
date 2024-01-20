@@ -50,16 +50,19 @@ const schema = yup
             .matches(/^[a-zA-Z]+$/, 'Input correct name with letters only'),
         email: yup
             .string()
-            .required('Email is required')
+            .required()
+            .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+        birthday: yup.date().required().transform(parseDateString).max(today),
+        phone: yup
+            .string()
+            .required()
             .matches(
-                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                'Input correct email',
+                /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
             ),
-        birthday: yup
-            .date()
-            .required('Birthday is required')
-            .transform(parseDateString)
-            .max(today),
+        city: yup
+            .string()
+            .required()
+            .matches(/^[A-Z][a-zA-Z0-9-' ]*$/),
     })
     .required()
 
@@ -210,14 +213,26 @@ function UserForm() {
                     </StyledUserInfoLabel>
                     <StyledUserInfoLabel htmlFor="phone">
                         <LabelText>Phone:</LabelText>
-                        <UserFormInputGroupStyled>
-                            <input id="phone" type="text" placeholder="Phone" />
+                        <UserFormInputGroupStyled error={!!errors.phone}>
+                            <Input
+                                id="phone"
+                                name="phone"
+                                type="text"
+                                placeholder="Phone"
+                                register={register}
+                            />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
                     <StyledUserInfoLabel htmlFor="city">
                         <LabelText>City:</LabelText>
-                        <UserFormInputGroupStyled>
-                            <input id="city" type="text" placeholder="City" />
+                        <UserFormInputGroupStyled error={!!errors.city}>
+                            <Input
+                                id="city"
+                                name="city"
+                                type="text"
+                                placeholder="City"
+                                register={register}
+                            />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
                 </InputsUserFormWrapper>
