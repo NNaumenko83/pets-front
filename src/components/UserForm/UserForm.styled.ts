@@ -38,9 +38,9 @@ export const LabelText = styled.label`
     letter-spacing: 0.72px;
 `
 
-export const UserFormStyled = styled.form`
+export const UserFormWrapper = styled.div`
     width: 24.6875rem;
-    height: 32.5rem;
+    height: 580px;
     padding: 1.25rem 1.5rem;
     display: flex;
     align-items: center;
@@ -73,4 +73,10 @@ export const AvatarInputWrapper = styled.div`
     align-items: center;
     gap: 0.9375rem;
     margin-bottom: 26px;
+`
+export const StyledUserForm = styled.form`
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
 `

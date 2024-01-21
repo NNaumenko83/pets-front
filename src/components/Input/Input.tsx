@@ -6,14 +6,16 @@ import { FieldValues, Path, UseFormRegister } from 'react-hook-form'
 import InputStyled from './Input.styled'
 
 interface InputFieldProps<TFieldValues extends FieldValues> {
+    id?: string | undefined
     type: string
     register: UseFormRegister<TFieldValues>
     placeholder: string
     name: Path<TFieldValues>
-    disabled: boolean | undefined
+    disabled?: boolean | undefined
 }
 
 function Input<TFieldValues extends FieldValues>({
+    id,
     type,
     register,
     placeholder,
@@ -23,6 +25,7 @@ function Input<TFieldValues extends FieldValues>({
     return (
         <InputStyled
             {...register(name)}
+            id={id}
             name={name}
             type={type}
             placeholder={placeholder}
@@ -30,5 +33,7 @@ function Input<TFieldValues extends FieldValues>({
         />
     )
 }
+
+Input.defaultProps = { id: undefined, disabled: false }
 
 export default Input

@@ -12,7 +12,7 @@ import DialogContent from '@mui/material/DialogContent'
 import axios from 'axios'
 import parseDateString from 'src/utils/parseDateString'
 import {
-    UserFormStyled,
+    UserFormWrapper,
     StyledBox,
     AvatarWrapper,
     InputsUserFormWrapper,
@@ -22,6 +22,7 @@ import {
     StyledEditIcon,
     StyledUserInfoLabel,
     LabelText,
+    StyledUserForm,
 } from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
 import AuthButton from '../AuthButton/AuthButton'
@@ -70,10 +71,8 @@ type TFormData = yup.InferType<typeof schema>
 
 function UserForm() {
     const [open, setOpen] = useState(false)
-
-    const handleClickOpen = () => {
-        setOpen(true)
-    }
+    const [isEditing, setIsEditing] = useState(false)
+    console.log('isEditing:', isEditing)
 
     const handleClose = () => {
         setOpen(false)
@@ -123,24 +122,12 @@ function UserForm() {
         setCroppedAreaPixels(croppedAreaPixels)
     }
 
-    // const handleSubmit = async e => {
-    //     e.preventDefault()
-
-    //     const avatar = await fetch(croppedImage)
-    //     const blobImage = await avatar.blob()
-
-    //     const formData = new FormData()
-
-    //     formData.append('avatar', blobImage, 'croppedImage.jpeg')
-    //     for (const [key, value] of formData.entries()) {
-    //         console.log(key, value)
-    //     }
-    //     const res = await axios.patch('/auth/avatars', formData)
-    //     console.log('res:', res)
-    // }
+    const onEditButtonClick = () => {
+        setIsEditing(!isEditing)
+    }
 
     return (
-        <div>
+        <UserFormWrapper>
             <AvatarInputWrapper>
                 <AvatarWrapper>
                     {croppedImage ? (
@@ -166,9 +153,10 @@ function UserForm() {
                     />
                 </AvatarLabel>
             </AvatarInputWrapper>
-            <UserFormStyled
+            <StyledUserForm
                 onSubmit={handleSubmit(data => {
                     console.log('data:', data)
+                    setIsEditing(false)
                 })}
             >
                 <InputsUserFormWrapper>
@@ -181,10 +169,8 @@ function UserForm() {
                                 name="name"
                                 placeholder="Name"
                                 register={register}
+                                disabled={!isEditing}
                             />
-                            <InputRightAddon>
-                                <StyledEditIcon />
-                            </InputRightAddon>
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
                     <StyledUserInfoLabel htmlFor="email">
@@ -196,6 +182,7 @@ function UserForm() {
                                 name="email"
                                 placeholder="Email"
                                 register={register}
+                                disabled={!isEditing}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
@@ -208,6 +195,7 @@ function UserForm() {
                                 name="birthday"
                                 placeholder="Birthday"
                                 register={register}
+                                disabled={!isEditing}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
@@ -220,6 +208,7 @@ function UserForm() {
                                 type="text"
                                 placeholder="Phone"
                                 register={register}
+                                disabled={!isEditing}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
@@ -232,13 +221,18 @@ function UserForm() {
                                 type="text"
                                 placeholder="City"
                                 register={register}
+                                disabled={!isEditing}
                             />
                         </UserFormInputGroupStyled>
                     </StyledUserInfoLabel>
                 </InputsUserFormWrapper>
-
-                <button type="submit">Submit</button>
-            </UserFormStyled>
+                {isEditing && <AuthButton type="submit">Save</AuthButton>}
+                {!isEditing && (
+                    <AuthButton type="button" onClick={onEditButtonClick}>
+                        Edit
+                    </AuthButton>
+                )}
+            </StyledUserForm>
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent
                     dividers
@@ -269,7 +263,7 @@ function UserForm() {
                     </StyledBox>
                 </DialogActions>
             </Dialog>
-        </div>
+        </UserFormWrapper>
     )
 }
 
