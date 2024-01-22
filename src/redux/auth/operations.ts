@@ -83,3 +83,5 @@ export const logout = createAsyncThunk<
         return rejectWithValue('Something went wrong')
     }
 })
+
+// Update avatar

@@ -106,6 +106,7 @@ const theme = createTheme({
         authLinkCurrentBgColor: '#FFC107',
         authLinkBgColor: '#FFFFFF',
         linkHovertColor: '#FFC107',
+        // ${({ theme}) =>(theme as any).colors?.linkHovertColor}
     },
 })
 

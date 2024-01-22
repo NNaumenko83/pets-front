@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled'
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { RiEdit2Line } from 'react-icons/ri'
@@ -14,6 +15,14 @@ export const AvatarLabel = styled.label`
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    transition: all 250ms linear;
+    :hover {
+        cursor: pointer;
+        color: ${({ theme }) => (theme as any).colors?.linkHovertColor};
+        div {
+            color: ${({ theme }) => (theme as any).colors?.linkHovertColor};
+        }
+    }
 `
 
 export const StyledUserInfoLabel = styled.label`
@@ -54,13 +63,6 @@ export const StyledBox = styled(Box)`
     justify-content: center;
 `
 
-export const AvatarWrapper = styled.div`
-    width: 182px;
-    height: 182px;
-    border-radius: 40px;
-    overflow: hidden;
-`
-
 export const InputsUserFormWrapper = styled.div`
     display: flex;
     flex-direction: column;
@@ -79,4 +81,8 @@ export const StyledUserForm = styled.form`
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+`
+export const AvatarWrapper = styled.div`
+    color: ${({ theme }) => (theme as any).colors?.iconsColor};
+    transition: all 250ms linear;
 `

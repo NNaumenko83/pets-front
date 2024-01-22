@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import { useState } from 'react'
@@ -9,29 +10,27 @@ import * as yup from 'yup'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
-import axios from 'axios'
+
 import parseDateString from 'src/utils/parseDateString'
 import {
     UserFormWrapper,
     StyledBox,
-    AvatarWrapper,
     InputsUserFormWrapper,
     AvatarInputWrapper,
     UserFormInputGroupStyled,
     AvatarLabel,
-    StyledEditIcon,
     StyledUserInfoLabel,
     LabelText,
     StyledUserForm,
+    AvatarWrapper,
 } from './UserForm.styled'
 import CropperImage from '../CropperImage/CropperImage'
 import AuthButton from '../AuthButton/AuthButton'
 
-import photoDefault from '../../assets/images/PhotoDefault.png'
 import Icon from '../Icon/Icon'
-import InputRightAddon from '../InputRightAddon/InputRightAddon'
 
 import Input from '../Input/Input'
+import UserAvatar from '../UserAvatar/UserAvatar'
 
 const today = new Date()
 
@@ -42,6 +41,22 @@ function readFile(file) {
         reader.readAsDataURL(file)
     })
 }
+
+// const handleSubmit = async e => {
+//     e.preventDefault()
+
+//     const avatar = await fetch(croppedImage)
+//     const blobImage = await avatar.blob()
+
+//     const formData = new FormData()
+
+//     formData.append('avatar', blobImage, 'croppedImage.jpeg')
+//     for (const [key, value] of formData.entries()) {
+//         console.log(key, value)
+//     }
+//     const res = await axios.patch('/auth/avatars', formData)
+//     console.log('res:', res)
+// }
 
 const schema = yup
     .object({
@@ -72,7 +87,6 @@ type TFormData = yup.InferType<typeof schema>
 function UserForm() {
     const [open, setOpen] = useState(false)
     const [isEditing, setIsEditing] = useState(false)
-    console.log('isEditing:', isEditing)
 
     const handleClose = () => {
         setOpen(false)
@@ -98,7 +112,9 @@ function UserForm() {
             const file = e.target.files[0]
 
             const imageDataUrl = await readFile(file)
+
             setImageSrc(imageDataUrl)
+            e.target.value = null
             setOpen(true)
         }
     }
@@ -110,7 +126,6 @@ function UserForm() {
                 croppedAreaPixels,
                 rotation,
             )
-            console.log('donee', { croppedImage })
             setCroppedImage(croppedImage)
             setOpen(false)
         } catch (e) {
@@ -126,32 +141,39 @@ function UserForm() {
         setIsEditing(!isEditing)
     }
 
+    const onCancelButtonClick = () => {
+        setCroppedImage(null)
+    }
+
     return (
         <UserFormWrapper>
             <AvatarInputWrapper>
-                <AvatarWrapper>
-                    {croppedImage ? (
-                        <img src={croppedImage} alt="avatar" width="182" />
-                    ) : (
-                        <img
-                            src={photoDefault}
-                            alt="defaultAvatar"
-                            width="182"
+                <UserAvatar croppedImage={croppedImage} />
+                {!croppedImage ? (
+                    <AvatarLabel htmlFor="avatar">
+                        <AvatarWrapper>
+                            <Icon name="camera" width={24} height={24} />
+                        </AvatarWrapper>
+                        Edit Photo
+                        <input
+                            id="avatar"
+                            type="file"
+                            onChange={onFileChange}
+                            accept="image/*"
+                            style={{ display: 'none' }}
+                            name="avatar"
                         />
-                    )}
-                </AvatarWrapper>
-                <AvatarLabel htmlFor="avatar">
-                    <Icon name="camera" width={24} height={24} />
-                    Edit Photo
-                    <input
-                        id="avatar"
-                        type="file"
-                        onChange={onFileChange}
-                        accept="image/*"
-                        style={{ display: 'none' }}
-                        name="avatar"
-                    />
-                </AvatarLabel>
+                    </AvatarLabel>
+                ) : (
+                    <div>
+                        <button type="button">
+                            <Icon name="check" />
+                        </button>
+                        <button type="button" onClick={onCancelButtonClick}>
+                            <Icon name="cross-small" />
+                        </button>
+                    </div>
+                )}
             </AvatarInputWrapper>
             <StyledUserForm
                 onSubmit={handleSubmit(data => {
