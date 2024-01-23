@@ -97,7 +97,7 @@ function UserForm() {
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    const [croppedImage, setCroppedImage] = useState<string | null>(null)
+    const [croppedImage, setCroppedImage] = useState<string | undefined>()
 
     const {
         register,
@@ -121,12 +121,12 @@ function UserForm() {
 
     const showCroppedImage = async () => {
         try {
-            const croppedImage = await getCroppedImg(
+            const image = await getCroppedImg(
                 imageSrc,
                 croppedAreaPixels,
                 rotation,
             )
-            setCroppedImage(croppedImage)
+            setCroppedImage(image)
             setOpen(false)
         } catch (e) {
             console.error(e)
@@ -139,6 +139,23 @@ function UserForm() {
 
     const onEditButtonClick = () => {
         setIsEditing(!isEditing)
+    }
+
+    const onConfirmButtonClick = async () => {
+        console.log('onConfirmButtonClick')
+        try {
+            const avatar = await fetch(croppedImage)
+            const blobImage = await avatar.blob()
+
+            const formData = new FormData()
+
+            formData.append('avatar', blobImage, 'croppedImage.jpeg')
+
+            // const res = await axios.patch('/auth/avatars', formData)
+            // console.log('res:', res)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
     const onCancelButtonClick = () => {
@@ -166,7 +183,7 @@ function UserForm() {
                     </AvatarLabel>
                 ) : (
                     <div>
-                        <button type="button">
+                        <button type="button" onClick={onConfirmButtonClick}>
                             <Icon name="check" />
                         </button>
                         <button type="button" onClick={onCancelButtonClick}>
