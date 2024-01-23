@@ -3,7 +3,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type TAuth from 'src/types/authType'
 import { setAuthHeader, clearAuthHeader } from 'src/services/axios/axios'
-import axios from 'axios'
+import axios, { AxiosResponse } from 'axios'
 import type { Auth } from './slice'
 
 export const register = createAsyncThunk<
@@ -85,3 +85,22 @@ export const logout = createAsyncThunk<
 })
 
 // Update avatar
+export const updateAvatar = createAsyncThunk<
+    AxiosResponse<string>,
+    FormData,
+    { rejectValue: string }
+>('auth/avatar', async (formData, { rejectWithValue }) => {
+    try {
+        const avatar: AxiosResponse<string> = await axios.patch(
+            '/auth/avatar',
+            formData,
+        )
+        console.log('avatar:', avatar)
+        return avatar
+    } catch (error) {
+        if (error instanceof Error) {
+            return rejectWithValue(error.message)
+        }
+        return rejectWithValue('Something went wrong')
+    }
+})

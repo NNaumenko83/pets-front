@@ -3,7 +3,13 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit'
 
-import { register, login, refreshUser, logout } from './operations'
+import {
+    register,
+    login,
+    refreshUser,
+    logout,
+    updateAvatar,
+} from './operations'
 
 // import { register, logIn, logOut, refreshUser } from './operations'
 
@@ -14,7 +20,7 @@ export type Auth = {
     isRefreshing: boolean
     showModalCongrats: boolean
     error: null | string
-    loading: boolean
+    isLoading: boolean
 }
 
 const initialState: Auth = {
@@ -25,7 +31,7 @@ const initialState: Auth = {
     isRefreshing: false,
     showModalCongrats: true,
     error: null,
-    loading: false,
+    isLoading: false,
 }
 
 const authSlice = createSlice({
@@ -59,11 +65,17 @@ const authSlice = createSlice({
                 state.isLoggedIn = true
                 state.isRefreshing = false
             })
+            .addCase(updateAvatar.pending, state => {
+                state.isLoading = true
+            })
+            .addCase(updateAvatar.fulfilled, state => {
+                state.isLoading = false
+            })
             // Щоб не писати rejected для кожного випадку використовуємо
             // addMatcher
             .addMatcher(isError, (state, action: PayloadAction<string>) => {
                 state.error = action.payload
-                state.loading = false
+                state.isLoading = false
                 state.isRefreshing = false
             })
     },

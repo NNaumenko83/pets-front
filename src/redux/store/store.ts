@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import { configureStore } from '@reduxjs/toolkit'
 import {
+    Persistor,
     persistStore,
     persistReducer,
     FLUSH,
@@ -39,7 +40,7 @@ export const store = configureStore({
         }),
 })
 
-export const persistor = persistStore(store)
+export const persistor: Persistor = persistStore(store)
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>

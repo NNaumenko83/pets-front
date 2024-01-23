@@ -1,8 +1,8 @@
 /* eslint-disable no-nested-ternary */
 import { selectUser } from 'src/redux/auth/selectors'
+import { useAppSelector } from 'src/redux/hooks'
 import AvatarWrapper from './UserAvatar.styled'
 import photoDefault from '../../assets/images/PhotoDefault.png'
-import { useAppSelector } from 'src/redux/hooks'
 
 interface IUserAvatarProps {
     croppedImage: string | undefined
