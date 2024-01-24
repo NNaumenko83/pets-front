@@ -12,6 +12,8 @@ import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
 
 import parseDateString from 'src/utils/parseDateString'
+import { updateAvatar } from 'src/redux/auth/operations'
+import { useAppDispatch } from 'src/redux/hooks'
 import {
     UserFormWrapper,
     StyledBox,
@@ -97,7 +99,9 @@ function UserForm() {
     const [rotation, setRotation] = useState(0)
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
-    const [croppedImage, setCroppedImage] = useState<string | undefined>()
+    const [croppedImage, setCroppedImage] = useState('')
+
+    const dispatch = useAppDispatch()
 
     const {
         register,
@@ -151,7 +155,11 @@ function UserForm() {
 
             formData.append('avatar', blobImage, 'croppedImage.jpeg')
 
-            // const res = await axios.patch('/auth/avatars', formData)
+            dispatch(updateAvatar(formData))
+
+            setCroppedImage('')
+
+            // const res = await authApi.updateAvatar(formData)
             // console.log('res:', res)
         } catch (error) {
             console.log(error)
@@ -159,7 +167,7 @@ function UserForm() {
     }
 
     const onCancelButtonClick = () => {
-        setCroppedImage(null)
+        setCroppedImage('')
     }
 
     return (

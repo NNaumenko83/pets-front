@@ -14,7 +14,11 @@ import {
 // import { register, logIn, logOut, refreshUser } from './operations'
 
 export type Auth = {
-    user: { name: string | null; email: string | null; avatar: string | null }
+    user: {
+        name: string | null
+        email: string | null
+        avatarURL: string | null
+    }
     token: string | null
     isLoggedIn: boolean
     isRefreshing: boolean
@@ -24,10 +28,10 @@ export type Auth = {
 }
 
 const initialState: Auth = {
-    user: { name: null, email: null, avatar: null },
+    user: { name: null, email: null, avatarURL: null },
     token: null,
     // isLoggedIn: false,
-    isLoggedIn: true,
+    isLoggedIn: false,
     isRefreshing: false,
     showModalCongrats: true,
     error: null,
@@ -68,8 +72,9 @@ const authSlice = createSlice({
             .addCase(updateAvatar.pending, state => {
                 state.isLoading = true
             })
-            .addCase(updateAvatar.fulfilled, state => {
+            .addCase(updateAvatar.fulfilled, (state, action) => {
                 state.isLoading = false
+                state.user.avatarURL = action.payload
             })
             // Щоб не писати rejected для кожного випадку використовуємо
             // addMatcher

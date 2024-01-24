@@ -9,14 +9,14 @@ interface IUserAvatarProps {
 }
 
 function UserAvatar({ croppedImage }: IUserAvatarProps) {
-    const { avatar } = useAppSelector(selectUser)
-    console.log('avatar:', avatar)
+    const { avatarURL } = useAppSelector(selectUser)
+    console.log('avatarURL:', avatarURL)
     return (
         <AvatarWrapper>
             {croppedImage ? (
                 <img src={croppedImage} alt="avatar" width="182" />
-            ) : avatar ? (
-                <img src={avatar} alt="defaultAvatar" width="182" />
+            ) : avatarURL ? (
+                <img src={avatarURL} alt="defaultAvatar" width="182" />
             ) : (
                 <img src={photoDefault} alt="defaultAvatar" width="182" />
             )}

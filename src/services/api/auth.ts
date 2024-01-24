@@ -1,5 +1,11 @@
-// import axios from 'axios'
+/* eslint-disable class-methods-use-this */
+import axios from 'axios'
 
-// class AuthApi {}
+class AuthApi {
+    async updateAvatar(formData) {
+        const res = await axios.patch('/auth/avatars', formData)
+        return res.data
+    }
+}
 
-// export default new AuthApi()
+export default new AuthApi()

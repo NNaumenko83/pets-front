@@ -5,6 +5,7 @@ import type TAuth from 'src/types/authType'
 import { setAuthHeader, clearAuthHeader } from 'src/services/axios/axios'
 import axios, { AxiosResponse } from 'axios'
 import type { Auth } from './slice'
+import authApi from '../../services/api/auth'
 
 export const register = createAsyncThunk<
     Pick<Auth, 'user' | 'token'>,
@@ -86,16 +87,13 @@ export const logout = createAsyncThunk<
 
 // Update avatar
 export const updateAvatar = createAsyncThunk<
-    AxiosResponse<string>,
+    string,
     FormData,
     { rejectValue: string }
 >('auth/avatar', async (formData, { rejectWithValue }) => {
     try {
-        const avatar: AxiosResponse<string> = await axios.patch(
-            '/auth/avatar',
-            formData,
-        )
-        console.log('avatar:', avatar)
+        const avatar = await authApi.updateAvatar(formData)
+
         return avatar
     } catch (error) {
         if (error instanceof Error) {
