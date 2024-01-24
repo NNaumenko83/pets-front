@@ -1,5 +1,5 @@
 /* eslint-disable no-nested-ternary */
-import { selectUser } from 'src/redux/auth/selectors'
+import { selectUser, selectIsLoading } from 'src/redux/auth/selectors'
 import { useAppSelector } from 'src/redux/hooks'
 import AvatarWrapper from './UserAvatar.styled'
 import photoDefault from '../../assets/images/PhotoDefault.png'
@@ -10,10 +10,15 @@ interface IUserAvatarProps {
 
 function UserAvatar({ croppedImage }: IUserAvatarProps) {
     const { avatarURL } = useAppSelector(selectUser)
+    const isLoading = useAppSelector(selectIsLoading)
+    console.log('isLoading:', isLoading)
+
     console.log('avatarURL:', avatarURL)
     return (
         <AvatarWrapper>
-            {croppedImage ? (
+            {isLoading ? (
+                <h1>Loading...</h1>
+            ) : croppedImage ? (
                 <img src={croppedImage} alt="avatar" width="182" />
             ) : avatarURL ? (
                 <img src={avatarURL} alt="defaultAvatar" width="182" />

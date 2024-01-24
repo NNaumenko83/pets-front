@@ -100,6 +100,7 @@ function UserForm() {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState('')
+    console.log('croppedImage:', croppedImage)
 
     const dispatch = useAppDispatch()
 
@@ -146,7 +147,6 @@ function UserForm() {
     }
 
     const onConfirmButtonClick = async () => {
-        console.log('onConfirmButtonClick')
         try {
             const avatar = await fetch(croppedImage)
             const blobImage = await avatar.blob()
@@ -158,9 +158,6 @@ function UserForm() {
             dispatch(updateAvatar(formData))
 
             setCroppedImage('')
-
-            // const res = await authApi.updateAvatar(formData)
-            // console.log('res:', res)
         } catch (error) {
             console.log(error)
         }
