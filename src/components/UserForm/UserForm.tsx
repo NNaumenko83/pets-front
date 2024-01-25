@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-shadow */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
@@ -10,6 +12,7 @@ import * as yup from 'yup'
 import Dialog from '@mui/material/Dialog'
 import DialogActions from '@mui/material/DialogActions'
 import DialogContent from '@mui/material/DialogContent'
+import { format } from 'date-fns'
 
 import parseDateString from 'src/utils/parseDateString'
 import { updateAvatar } from 'src/redux/auth/operations'
@@ -87,8 +90,8 @@ function UserForm() {
     const [croppedImage, setCroppedImage] = useState('')
 
     const dispatch = useAppDispatch()
-    const user = useAppSelector(selectUser)
-    console.log('user:', user)
+    const { name, email, phone, city, birthday } = useAppSelector(selectUser)
+    console.log('name:', name)
 
     const {
         register,
@@ -153,6 +156,15 @@ function UserForm() {
         setCroppedImage('')
     }
 
+    const handleSumbit = data => {
+        const { birthday } = data
+        const formatedBirthday = format(new Date(birthday), 'dd-MM-yyyy')
+        const body = { ...data, birthday: formatedBirthday }
+        console.log('body:', body)
+
+        setIsEditing(false)
+    }
+
     return (
         <UserFormWrapper>
             <AvatarInputWrapper>
@@ -185,8 +197,8 @@ function UserForm() {
             </AvatarInputWrapper>
             <StyledUserForm
                 onSubmit={handleSubmit(data => {
-                    console.log('data:', data)
-                    setIsEditing(false)
+                    handleSumbit(data)
+                    // setIsEditing(false)
                 })}
             >
                 <InputsUserFormWrapper>
@@ -195,7 +207,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.name}>
                             <Input
                                 id="name"
-                                defaultValue="test"
+                                defaultValue={name}
                                 type="text"
                                 name="name"
                                 placeholder="Name"
@@ -209,6 +221,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.email}>
                             <Input
                                 id="email"
+                                defaultValue={email}
                                 type="email"
                                 name="email"
                                 placeholder="Email"
@@ -222,6 +235,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.birthday}>
                             <Input
                                 id="birthday"
+                                defaultValue={birthday}
                                 type="text"
                                 name="birthday"
                                 placeholder="Birthday"
@@ -235,6 +249,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.phone}>
                             <Input
                                 id="phone"
+                                defaultValue={phone}
                                 name="phone"
                                 type="text"
                                 placeholder="Phone"
@@ -248,6 +263,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.city}>
                             <Input
                                 id="city"
+                                defaultValue={city}
                                 name="city"
                                 type="text"
                                 placeholder="City"
