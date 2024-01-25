@@ -3,7 +3,7 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import type TAuth from 'src/types/authType'
 import { setAuthHeader, clearAuthHeader } from 'src/services/axios/axios'
-import axios, { AxiosResponse } from 'axios'
+import axios from 'axios'
 import type { Auth } from './slice'
 import authApi from '../../services/api/auth'
 
@@ -44,7 +44,7 @@ export const login = createAsyncThunk<
 })
 
 export const refreshUser = createAsyncThunk<
-    Pick<Auth, 'user' | 'token'>,
+    Pick<Auth, 'user'>,
     undefined,
     { rejectValue: string; state: { auth: Auth } }
 >('auth/refresh', async (_, { rejectWithValue, getState }) => {
@@ -59,8 +59,8 @@ export const refreshUser = createAsyncThunk<
         // If there is a token, add it to the HTTP header and perform the request
         setAuthHeader(persistedToken)
         const res = await axios.get('/auth/current')
-        const { user, accessToken: token } = res.data
-        return { user, token }
+
+        return res.data
     } catch (error) {
         if (error instanceof Error) {
             return rejectWithValue(error.message)

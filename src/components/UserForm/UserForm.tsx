@@ -87,12 +87,8 @@ function UserForm() {
     const [croppedImage, setCroppedImage] = useState('')
 
     const dispatch = useAppDispatch()
-    const { name, birthday, city, email, phone } = useAppSelector(selectUser)
-    console.log('phone:', phone)
-    console.log('email:', email)
-    console.log('city:', city)
-    console.log('birthday:', birthday)
-    console.log('name:', name)
+    const user = useAppSelector(selectUser)
+    console.log('user:', user)
 
     const {
         register,

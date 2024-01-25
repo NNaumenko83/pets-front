@@ -73,8 +73,7 @@ const authSlice = createSlice({
                 state.isRefreshing = true
             })
             .addCase(refreshUser.fulfilled, (state, action) => {
-                state.user = action.payload.user
-                state.token = action.payload.token
+                state.user = action.payload
                 state.showModalCongrats = false
                 state.isLoggedIn = true
                 state.isRefreshing = false
@@ -83,6 +82,7 @@ const authSlice = createSlice({
                 state.isLoading = true
             })
             .addCase(updateAvatar.fulfilled, (state, action) => {
+                console.log('action:', action)
                 state.isLoading = false
                 state.user.avatarURL = action.payload
             })
