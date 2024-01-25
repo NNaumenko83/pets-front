@@ -18,6 +18,9 @@ export type Auth = {
         name: string | null
         email: string | null
         avatarURL: string | null
+        phone: string | null
+        city: string | null
+        birthday: string | null
     }
     token: string | null
     isLoggedIn: boolean
@@ -28,7 +31,14 @@ export type Auth = {
 }
 
 const initialState: Auth = {
-    user: { name: null, email: null, avatarURL: null },
+    user: {
+        name: null,
+        email: null,
+        avatarURL: null,
+        phone: null,
+        city: null,
+        birthday: null,
+    },
     token: null,
     // isLoggedIn: false,
     isLoggedIn: false,

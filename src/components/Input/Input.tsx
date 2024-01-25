@@ -12,6 +12,7 @@ interface InputFieldProps<TFieldValues extends FieldValues> {
     placeholder: string
     name: Path<TFieldValues>
     disabled?: boolean | undefined
+    defaultValue?: string
 }
 
 function Input<TFieldValues extends FieldValues>({
@@ -21,6 +22,7 @@ function Input<TFieldValues extends FieldValues>({
     placeholder,
     name,
     disabled,
+    defaultValue,
 }: InputFieldProps<TFieldValues>) {
     return (
         <InputStyled
@@ -30,10 +32,11 @@ function Input<TFieldValues extends FieldValues>({
             type={type}
             placeholder={placeholder}
             disabled={disabled}
+            defaultValue={defaultValue}
         />
     )
 }
 
-Input.defaultProps = { id: undefined, disabled: false }
+Input.defaultProps = { id: undefined, disabled: false, defaultValue: undefined }
 
 export default Input

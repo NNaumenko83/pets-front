@@ -13,7 +13,8 @@ import DialogContent from '@mui/material/DialogContent'
 
 import parseDateString from 'src/utils/parseDateString'
 import { updateAvatar } from 'src/redux/auth/operations'
-import { useAppDispatch } from 'src/redux/hooks'
+import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
+import { selectUser } from 'src/redux/auth/selectors'
 import {
     UserFormWrapper,
     StyledBox,
@@ -43,22 +44,6 @@ function readFile(file) {
         reader.readAsDataURL(file)
     })
 }
-
-// const handleSubmit = async e => {
-//     e.preventDefault()
-
-//     const avatar = await fetch(croppedImage)
-//     const blobImage = await avatar.blob()
-
-//     const formData = new FormData()
-
-//     formData.append('avatar', blobImage, 'croppedImage.jpeg')
-//     for (const [key, value] of formData.entries()) {
-//         console.log(key, value)
-//     }
-//     const res = await axios.patch('/auth/avatars', formData)
-//     console.log('res:', res)
-// }
 
 const schema = yup
     .object({
@@ -100,9 +85,14 @@ function UserForm() {
     const [zoom, setZoom] = useState(1)
     const [croppedAreaPixels, setCroppedAreaPixels] = useState(null)
     const [croppedImage, setCroppedImage] = useState('')
-    console.log('croppedImage:', croppedImage)
 
     const dispatch = useAppDispatch()
+    const { name, birthday, city, email, phone } = useAppSelector(selectUser)
+    console.log('phone:', phone)
+    console.log('email:', email)
+    console.log('city:', city)
+    console.log('birthday:', birthday)
+    console.log('name:', name)
 
     const {
         register,
@@ -209,6 +199,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.name}>
                             <Input
                                 id="name"
+                                defaultValue="test"
                                 type="text"
                                 name="name"
                                 placeholder="Name"
