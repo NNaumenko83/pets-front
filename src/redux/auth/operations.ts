@@ -60,7 +60,7 @@ export const refreshUser = createAsyncThunk<
         setAuthHeader(persistedToken)
         const res = await axios.get('/auth/current')
 
-        return res.data
+        return { user: res.data }
     } catch (error) {
         if (error instanceof Error) {
             return rejectWithValue(error.message)
