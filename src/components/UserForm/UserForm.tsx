@@ -19,6 +19,12 @@ import { updateAvatar } from 'src/redux/auth/operations'
 import { useAppDispatch, useAppSelector } from 'src/redux/hooks'
 import { selectUser } from 'src/redux/auth/selectors'
 import {
+    emailRegexp,
+    phoneRegexp,
+    cityRegexp,
+    nameRegexp,
+} from 'src/constants/regex'
+import {
     UserFormWrapper,
     StyledBox,
     InputsUserFormWrapper,
@@ -50,25 +56,11 @@ function readFile(file) {
 
 const schema = yup
     .object({
-        name: yup
-            .string()
-            .required()
-            .matches(/^[a-zA-Z]+$/, 'Input correct name with letters only'),
-        email: yup
-            .string()
-            .required()
-            .matches(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/),
+        name: yup.string().required().matches(nameRegexp),
+        email: yup.string().required().matches(emailRegexp),
         birthday: yup.date().required().transform(parseDateString).max(today),
-        phone: yup
-            .string()
-            .required()
-            .matches(
-                /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/,
-            ),
-        city: yup
-            .string()
-            .required()
-            .matches(/^[A-Z][a-zA-Z0-9-' ]*$/),
+        phone: yup.string().required().matches(phoneRegexp),
+        city: yup.string().required().matches(cityRegexp),
     })
     .required()
 

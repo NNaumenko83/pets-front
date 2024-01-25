@@ -4,6 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import type TAuth from 'src/types/authType'
 import { setAuthHeader, clearAuthHeader } from 'src/services/axios/axios'
 import axios from 'axios'
+import type UserUpdateType from 'src/types/userUpdatetype'
 import type { Auth } from './slice'
 import authApi from '../../services/api/auth'
 
@@ -91,6 +92,24 @@ export const updateAvatar = createAsyncThunk<
     FormData,
     { rejectValue: string }
 >('auth/avatar', async (formData, { rejectWithValue }) => {
+    try {
+        const avatar = await authApi.updateAvatar(formData)
+
+        return avatar
+    } catch (error) {
+        if (error instanceof Error) {
+            return rejectWithValue(error.message)
+        }
+        return rejectWithValue('Something went wrong')
+    }
+})
+
+// Update user info
+export const updateUserInfo = createAsyncThunk<
+    Pick<Auth, 'user'>,
+    UserUpdateType,
+    { rejectValue: string }
+>('auth/update', async (formData, { rejectWithValue }) => {
     try {
         const avatar = await authApi.updateAvatar(formData)
 
