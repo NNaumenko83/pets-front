@@ -7,14 +7,12 @@ interface IRestrictedRouteProps {
 
 function RestrictedRoute({ redirectTo = '/' }: IRestrictedRouteProps) {
     const location = useLocation()
+    const pageFrom = location.state?.from?.pathname ?? redirectTo
 
     const { isLoggedIn } = useAuth()
 
     return isLoggedIn ? (
-        <Navigate
-            to={location.state.from.pathname || redirectTo}
-            state={{ from: location }}
-        />
+        <Navigate to={pageFrom} state={{ from: location }} />
     ) : (
         <Outlet />
     )
