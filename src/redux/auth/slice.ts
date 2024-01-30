@@ -41,7 +41,7 @@ const initialState: Auth = {
     },
     token: null,
     // isLoggedIn: false,
-    isLoggedIn: false,
+    isLoggedIn: true,
     isRefreshing: false,
     showModalCongrats: true,
     error: null,

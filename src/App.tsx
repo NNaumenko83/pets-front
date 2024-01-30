@@ -20,6 +20,8 @@ const RegisterPage = lazy(() => import('./pages/RegisterPage/RegisterPage'))
 
 const UserPage = lazy(() => import('./pages/UserPage/UserPage'))
 
+const AddPet = lazy(() => import('./pages/AddPetPage/AddPetPage'))
+
 function App() {
     const dispatch = useAppDispatch()
 
@@ -44,6 +46,7 @@ function App() {
                 </Route>
                 <Route element={<PrivateRoute />}>
                     <Route path="user" element={<UserPage />} />
+                    <Route path="add-pet" element={<AddPet />} />
                 </Route>
             </Route>
         </Routes>
