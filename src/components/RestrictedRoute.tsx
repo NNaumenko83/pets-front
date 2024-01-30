@@ -11,7 +11,10 @@ function RestrictedRoute({ redirectTo = '/' }: IRestrictedRouteProps) {
     const { isLoggedIn } = useAuth()
 
     return isLoggedIn ? (
-        <Navigate to={redirectTo} state={{ from: location }} />
+        <Navigate
+            to={location.state.from.pathname || redirectTo}
+            state={{ from: location }}
+        />
     ) : (
         <Outlet />
     )

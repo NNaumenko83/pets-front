@@ -4,6 +4,7 @@ import useAuth from 'src/hooks/useAuth'
 function PrivateRoute() {
     const { isLoggedIn, isRefreshing } = useAuth()
     const location = useLocation()
+
     const shouldRedirect = !isLoggedIn && !isRefreshing
 
     return shouldRedirect ? (
