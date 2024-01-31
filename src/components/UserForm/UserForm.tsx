@@ -83,7 +83,6 @@ function UserForm() {
 
     const dispatch = useAppDispatch()
     const { name, email, phone, city, birthday } = useAppSelector(selectUser)
-    console.log('name:', name)
 
     const {
         register,
@@ -91,6 +90,13 @@ function UserForm() {
         formState: { errors },
     } = useForm<TFormData>({
         resolver: yupResolver(schema),
+        defaultValues: {
+            name: name || '',
+            email: email || '',
+            phone: phone || '',
+            city: city || '',
+            birthday: birthday || '',
+        },
     })
 
     const onFileChange = async e => {
@@ -199,7 +205,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.name}>
                             <Input
                                 id="name"
-                                defaultValue={name}
+                                // defaultValue={name}
                                 type="text"
                                 name="name"
                                 placeholder="Name"
@@ -213,7 +219,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.email}>
                             <Input
                                 id="email"
-                                defaultValue={email}
+                                // defaultValue={email}
                                 type="email"
                                 name="email"
                                 placeholder="Email"
@@ -227,7 +233,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.birthday}>
                             <Input
                                 id="birthday"
-                                defaultValue={birthday}
+                                // defaultValue={birthday}
                                 type="text"
                                 name="birthday"
                                 placeholder="Birthday"
@@ -241,7 +247,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.phone}>
                             <Input
                                 id="phone"
-                                defaultValue={phone}
+                                // defaultValue={phone}
                                 name="phone"
                                 type="text"
                                 placeholder="Phone"
@@ -255,7 +261,7 @@ function UserForm() {
                         <UserFormInputGroupStyled error={!!errors.city}>
                             <Input
                                 id="city"
-                                defaultValue={city}
+                                // defaultValue={city}
                                 name="city"
                                 type="text"
                                 placeholder="City"

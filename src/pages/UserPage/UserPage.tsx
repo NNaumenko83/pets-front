@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import AppModal from 'src/components/AppModal/AppModal'
 
 import UserData from 'src/components/UserData/UserData'
@@ -29,7 +29,10 @@ function UserPage() {
                     My information:
                     <UserData />
                 </div>
-                <div>My pets:</div>
+                <div>
+                    My pets:
+                    <Link to="/add-pet">Add pet</Link>
+                </div>
             </UserPageContainer>
 
             <AppModal isOpen={isOpen} onClose={onClose}>
