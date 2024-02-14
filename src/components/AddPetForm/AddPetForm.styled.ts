@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 import styled from '@emotion/styled'
 
 type ILabelProps = {
@@ -5,6 +6,8 @@ type ILabelProps = {
 }
 type IStepNameProps = {
     current: boolean
+    step: number
+    currentStep: number
 }
 
 export const Label = styled.label<ILabelProps>`
@@ -45,7 +48,18 @@ export const StyledAddPetForm = styled.form`
 `
 export const StepName = styled.p<IStepNameProps>`
     width: 120px;
-    color: ${props => (props.current ? '#54ADFF' : '#888888')};
+    color: ${props => {
+        if (props.current) {
+            return '#54ADFF'
+        }
+
+        if (props.step < props.currentStep) {
+            return '#00C3AD'
+        }
+
+        return '#888888'
+    }};
+
     font-family: 'Manrope Medium';
     font-size: 16px;
     letter-spacing: 0px;
@@ -60,16 +74,46 @@ export const StepName = styled.p<IStepNameProps>`
         display: inline-block;
         width: 100%;
         height: 8px;
-        background: ${props => (props.current ? '#54ADFF' : '#CCE4FB')};
         border-radius: 8px;
+        background: ${props => {
+            if (props.current) {
+                return '#54ADFF'
+            }
+
+            if (props.step < props.currentStep) {
+                return '#00C3AD'
+            }
+
+            return '#CCE4FB'
+        }};
     }
 `
 export const ButtonsWrapper = styled.div`
     display: flex;
     margin-top: auto;
+    gap: 1.5rem;
 `
 export const InputsButtonsWrapper = styled.div`
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+`
+
+export const СancelButton = styled.button`
+    height: 2.5rem;
+    width: 94px;
+    margin-top: auto;
+    background: transparent;
+    margin-left: 28px;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+
+    font-family: 'Manrope Bold';
+    font-size: 16px;
+
+    line-height: 1.375;
+    letter-spacing: 4%;
+
+    color: #54adff;
 `

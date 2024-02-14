@@ -5,6 +5,7 @@ const StyledButton = styled.button`
     height: 40px;
 
     display: flex;
+    gap: 0.75rem;
 
     justify-content: center;
     align-items: center;
@@ -13,6 +14,13 @@ const StyledButton = styled.button`
 
     background: #54adff;
     margin-top: auto;
+
+    font-family: 'Manrope Bold';
+    font-size: 16px;
+    line-height: 1.38;
+    letter-spacing: 4%;
+
+    color: #fef9f9;
 `
 
 export default StyledButton
