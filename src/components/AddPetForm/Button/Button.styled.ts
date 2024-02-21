@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import styled from '@emotion/styled'
 
 const StyledButton = styled.button`
@@ -21,6 +22,12 @@ const StyledButton = styled.button`
     letter-spacing: 4%;
 
     color: #fef9f9;
+
+    &:hover,
+    &:focus {
+        background: ${({ theme }) =>
+            (theme as any).colors?.buttonHoverBackgroundColor};
+    }
 `
 
 export default StyledButton
