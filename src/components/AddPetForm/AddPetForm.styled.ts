@@ -117,3 +117,12 @@ export const СancelButton = styled.button`
 
     color: #54adff;
 `
+
+export const InputsWrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+export const StyledLabel = styled.label`
+    display: flex;
+    flex-direction: column;
+`

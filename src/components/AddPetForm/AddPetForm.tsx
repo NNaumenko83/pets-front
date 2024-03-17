@@ -8,6 +8,8 @@ import {
     StepsWrapper,
     StyledAddPetForm,
     СancelButton,
+    InputsWrapper,
+    StyledLabel,
 } from './AddPetForm.styled'
 import PetFormTitle from './PetFormTitle/PetFormTitle'
 import Button from './Button/Button'
@@ -17,7 +19,9 @@ function AddPetForm() {
     const [step, setStep] = useState(1)
     const [typeAdv, setTypeAdv] = useState('your pet')
 
-    const handleCheckBoxChange = e => {
+    const handleCheckBoxChange: React.ChangeEventHandler<
+        HTMLInputElement
+    > = e => {
         setTypeAdv(e.target.value)
     }
     return (
@@ -127,8 +131,8 @@ function AddPetForm() {
                 )}
                 {step === 2 && (
                     <>
-                        <div>
-                            <label htmlFor="name">
+                        <InputsWrapper>
+                            <StyledLabel htmlFor="name">
                                 <span>Pet’s name</span>
                                 <input
                                     id="name"
@@ -136,8 +140,8 @@ function AddPetForm() {
                                     type="text"
                                     placeholder="Type name pet"
                                 />
-                            </label>
-                            <label htmlFor="birth">
+                            </StyledLabel>
+                            <StyledLabel htmlFor="birth">
                                 <span>Date of birth</span>
                                 <input
                                     id="birth"
@@ -145,8 +149,8 @@ function AddPetForm() {
                                     type="text"
                                     placeholder="Type date of birth"
                                 />
-                            </label>
-                            <label htmlFor="birth">
+                            </StyledLabel>
+                            <StyledLabel htmlFor="birth">
                                 <span>Breed</span>
                                 <input
                                     id="breed"
@@ -154,8 +158,8 @@ function AddPetForm() {
                                     type="text"
                                     placeholder="Type breed"
                                 />
-                            </label>
-                        </div>
+                            </StyledLabel>
+                        </InputsWrapper>
 
                         <input type="text" />
 
