@@ -1,13 +1,19 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable no-nested-ternary */
 import styled from '@emotion/styled'
 
 type ILabelProps = {
     checked: boolean
 }
+
 type IStepNameProps = {
     current: boolean
     step: number
     currentStep: number
+}
+
+type IStepsWrapperProps = {
+    step: number
 }
 
 export const Label = styled.label<ILabelProps>`
@@ -28,11 +34,11 @@ export const OptionsWrapper = styled.div`
     align-items: flex-start;
     gap: 0.75rem;
 `
-export const StepsWrapper = styled.div`
+export const StepsWrapper = styled.div<IStepsWrapperProps>`
     display: flex;
     width: 100%;
     gap: 16px;
-    margin-bottom: 2.5rem;
+    margin-bottom: ${props => (props.step === 1 ? '2.5rem;' : '1rem')};
 `
 
 export const StyledAddPetForm = styled.form`
@@ -121,8 +127,15 @@ export const СancelButton = styled.button`
 export const InputsWrapper = styled.div`
     display: flex;
     flex-direction: column;
+    gap: 1.5rem;
 `
 export const StyledLabel = styled.label`
     display: flex;
     flex-direction: column;
+    gap: 0.5rem;
+
+    color: #111111;
+    font-family: 'Manrope Medium';
+    font-size: 20px;
+    line-height: 1.325;
 `

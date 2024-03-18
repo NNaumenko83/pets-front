@@ -14,6 +14,7 @@ import {
 import PetFormTitle from './PetFormTitle/PetFormTitle'
 import Button from './Button/Button'
 import Icon from '../Icon/Icon'
+import Input from './Input/Input'
 
 function AddPetForm() {
     const [step, setStep] = useState(1)
@@ -34,7 +35,7 @@ function AddPetForm() {
                 {step !== 1 && typeAdv === 'sell' && 'Add  pet for sell'}
                 {step !== 1 && typeAdv === 'lost-found' && 'Add lost pet'}
             </PetFormTitle>
-            <StepsWrapper>
+            <StepsWrapper step={step}>
                 <StepName current={step === 1} step={1} currentStep={step}>
                     Choose option
                 </StepName>
@@ -134,7 +135,7 @@ function AddPetForm() {
                         <InputsWrapper>
                             <StyledLabel htmlFor="name">
                                 <span>Pet’s name</span>
-                                <input
+                                <Input
                                     id="name"
                                     name="name"
                                     type="text"
@@ -143,16 +144,16 @@ function AddPetForm() {
                             </StyledLabel>
                             <StyledLabel htmlFor="birth">
                                 <span>Date of birth</span>
-                                <input
+                                <Input
                                     id="birth"
                                     name="birth"
                                     type="text"
                                     placeholder="Type date of birth"
                                 />
                             </StyledLabel>
-                            <StyledLabel htmlFor="birth">
+                            <StyledLabel htmlFor="breed">
                                 <span>Breed</span>
-                                <input
+                                <Input
                                     id="breed"
                                     name="breed"
                                     type="text"
@@ -160,8 +161,6 @@ function AddPetForm() {
                                 />
                             </StyledLabel>
                         </InputsWrapper>
-
-                        <input type="text" />
 
                         <ButtonsWrapper>
                             <СancelButton
