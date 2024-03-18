@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { useForm } from 'react-hook-form'
 import {
     ButtonsWrapper,
     InputsButtonsWrapper,
@@ -17,6 +18,12 @@ import Icon from '../Icon/Icon'
 import Input from './Input/Input'
 
 function AddPetForm() {
+    const { register, handleSubmit, errors } = useForm({
+        defaultValues: {
+            type: 'your pet',
+        },
+    })
+
     const [step, setStep] = useState(1)
     const [typeAdv, setTypeAdv] = useState('your pet')
 
@@ -25,8 +32,13 @@ function AddPetForm() {
     > = e => {
         setTypeAdv(e.target.value)
     }
+
+    const handleSubmitForm = data => {
+        console.log('data:', data)
+    }
+
     return (
-        <StyledAddPetForm>
+        <StyledAddPetForm onSubmit={handleSubmit(handleSubmitForm)}>
             <PetFormTitle>
                 {(step === 1 ||
                     typeAdv === 'your pet' ||
@@ -209,7 +221,7 @@ function AddPetForm() {
                             </СancelButton>
                             <Button
                                 type="submit"
-                                onClick={() => setStep(step + 1)}
+                                // onClick={() => setStep(step + 1)}
                             >
                                 <span>Submit</span>
                                 <Icon name="pawprint" width={24} height={24} />
