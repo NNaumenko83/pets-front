@@ -35,14 +35,24 @@ interface IFormInput {
 }
 
 function AddPetForm() {
-    const { register, handleSubmit, errors, watch } = useForm<IFormInput>()
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+        watch,
+    } = useForm<IFormInput>({
+        defaultValues: {
+            type: OptionEnum.sell,
+        },
+    })
 
+    console.log('errors:', errors)
     const type = watch('type')
     console.log('type:', type)
 
     const [step, setStep] = useState(1)
 
-    const handleSubmitForm = data => {
+    const handleSubmitForm = (data: IFormInput) => {
         console.log('data:', data)
     }
 
@@ -153,8 +163,8 @@ function AddPetForm() {
                             <StyledLabel htmlFor="name">
                                 <span>Pet’s name</span>
                                 <Input
+                                    {...register('name', { required: true })}
                                     id="name"
-                                    name="name"
                                     type="text"
                                     placeholder="Type name pet"
                                 />
@@ -162,8 +172,10 @@ function AddPetForm() {
                             <StyledLabel htmlFor="birth">
                                 <span>Date of birth</span>
                                 <Input
+                                    {...register('birthDate', {
+                                        required: true,
+                                    })}
                                     id="birth"
-                                    name="birth"
                                     type="text"
                                     placeholder="Type date of birth"
                                 />
@@ -171,8 +183,8 @@ function AddPetForm() {
                             <StyledLabel htmlFor="breed">
                                 <span>Breed</span>
                                 <Input
+                                    {...register('breed', { required: true })}
                                     id="breed"
-                                    name="breed"
                                     type="text"
                                     placeholder="Type breed"
                                 />
