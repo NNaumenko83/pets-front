@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-props-no-spreading */
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import {
@@ -17,21 +18,29 @@ import Button from './Button/Button'
 import Icon from '../Icon/Icon'
 import Input from './Input/Input'
 
+enum OptionEnum {
+    yourPet = 'your pet',
+    sell = 'sell',
+    lostFound = 'lost/found',
+    inGoodHands = 'in good hands',
+}
+
+interface IFormInput {
+    type: OptionEnum
+    name: string
+    birthDate: string
+    breed: string
+    image: string
+    comments: string
+}
+
 function AddPetForm() {
-    const { register, handleSubmit, errors } = useForm({
-        defaultValues: {
-            type: 'your pet',
-        },
-    })
+    const { register, handleSubmit, errors, watch } = useForm<IFormInput>()
+
+    const type = watch('type')
+    console.log('type:', type)
 
     const [step, setStep] = useState(1)
-    const [typeAdv, setTypeAdv] = useState('your pet')
-
-    const handleCheckBoxChange: React.ChangeEventHandler<
-        HTMLInputElement
-    > = e => {
-        setTypeAdv(e.target.value)
-    }
 
     const handleSubmitForm = data => {
         console.log('data:', data)
@@ -41,11 +50,11 @@ function AddPetForm() {
         <StyledAddPetForm onSubmit={handleSubmit(handleSubmitForm)}>
             <PetFormTitle>
                 {(step === 1 ||
-                    typeAdv === 'your pet' ||
-                    typeAdv === 'in good hands') &&
+                    type === 'your pet' ||
+                    type === 'in good hands') &&
                     'Add pet'}
-                {step !== 1 && typeAdv === 'sell' && 'Add  pet for sell'}
-                {step !== 1 && typeAdv === 'lost-found' && 'Add lost pet'}
+                {step !== 1 && type === 'sell' && 'Add  pet for sell'}
+                {step !== 1 && type === 'lost/found' && 'Add lost pet'}
             </PetFormTitle>
             <StepsWrapper step={step}>
                 <StepName current={step === 1} step={1} currentStep={step}>
@@ -64,62 +73,58 @@ function AddPetForm() {
                         <OptionsWrapper>
                             <Label
                                 htmlFor="your_pet"
-                                checked={typeAdv === 'your pet'}
+                                checked={type === 'your pet'}
                             >
                                 your pet
                                 <input
+                                    {...register('type')}
                                     type="radio"
                                     id="your_pet"
-                                    name="type"
                                     value="your pet"
                                     style={{ display: 'none' }}
-                                    checked={typeAdv === 'your pet'}
-                                    onChange={handleCheckBoxChange}
+                                    checked={type === 'your pet'}
                                 />
                             </Label>
 
-                            <Label htmlFor="sell" checked={typeAdv === 'sell'}>
+                            <Label htmlFor="sell" checked={type === 'sell'}>
                                 sell
                                 <input
+                                    {...register('type')}
                                     type="radio"
                                     id="sell"
-                                    name="type"
                                     value="sell"
                                     style={{ display: 'none' }}
-                                    checked={typeAdv === 'sell'}
-                                    onChange={handleCheckBoxChange}
+                                    checked={type === 'sell'}
                                 />
                             </Label>
 
                             <Label
                                 htmlFor="lost_found"
-                                checked={typeAdv === 'lost-found'}
+                                checked={type === 'lost/found'}
                             >
                                 lost/found
                                 <input
+                                    {...register('type')}
                                     type="radio"
                                     id="lost_found"
-                                    name="type"
-                                    value="lost-found"
+                                    value="lost/found"
                                     style={{ display: 'none' }}
-                                    checked={typeAdv === 'lost/found'}
-                                    onChange={handleCheckBoxChange}
+                                    checked={type === 'lost/found'}
                                 />
                             </Label>
 
                             <Label
                                 htmlFor="good_hands"
-                                checked={typeAdv === 'good_hands'}
+                                checked={type === 'in good hands'}
                             >
                                 in good hands
                                 <input
+                                    {...register('type')}
                                     type="radio"
                                     id="good_hands"
-                                    name="type"
-                                    value="good_hands"
+                                    value="in good hands"
                                     style={{ display: 'none' }}
-                                    checked={typeAdv === 'good_hands'}
-                                    onChange={handleCheckBoxChange}
+                                    checked={type === 'in good hands'}
                                 />
                             </Label>
                         </OptionsWrapper>
@@ -219,13 +224,10 @@ function AddPetForm() {
                                 />
                                 <span>Back</span>
                             </СancelButton>
-                            <Button
-                                type="submit"
-                                // onClick={() => setStep(step + 1)}
-                            >
+                            <button type="submit">
                                 <span>Submit</span>
                                 <Icon name="pawprint" width={24} height={24} />
-                            </Button>
+                            </button>
                         </ButtonsWrapper>
                     </>
                 )}
