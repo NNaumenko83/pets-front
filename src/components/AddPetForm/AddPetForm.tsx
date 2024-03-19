@@ -44,6 +44,7 @@ function AddPetForm() {
         defaultValues: {
             type: OptionEnum.sell,
         },
+        mode: 'onChange',
     })
 
     console.log('errors:', errors)
